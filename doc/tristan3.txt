@@ -1,0 +1,654 @@
+QA环境----------------------------------------------------------------------------------------------------------------------------------------------
+QA环境端口映射
+网站  116.236.229.43:5556
+图片资源 116.236.229.44:8005
+
+内部控制台
+http://memberqa.jje.com:5555/admin
+tester/Aa123456
+
+weblogic控制台
+http://memberqa.jje.com:5555/console
+weblogic
+weblogic123
+
+日志
+/logs/integration_fixbug/vbp.log
+
+
+secureCRT
+memberqa
+192.168.5.6
+weblogic
+weblogic123
+
+bananaqa
+192.168.5.138
+weblogic / root    sudo reboot
+123456
+
+重启weblogic
+/home/weblogic/Weblogic/user_projects/domains/InteQA_Domain123
+nohup startWebLogic.sh &
+
+DB
+jdbc:oracle:thin:@192.168.5.7:1521:Testqa
+memberqa
+654321
+
+UAT环境----------------------------------------------------------------------------------------------------------------------------------------------
+web
+http://paradise.ejinjiang.com/
+http://192.168.5.207:6068/vbp/score/queryChannelScore
+
+DB
+192.168.5.8  1521   autodb
+dataview/123456
+demo.xxx
+
+log
+\\192.168.1.220\imgdir 3\uat\3uat\bp\6066
+
+jekins
+http://jenkins.jje.com/view/r-3uat-pl/
+
+gateway
+http://192.168.2.248:8081/mgw/member/keyInfoCheck/card_no/6500014112
+
+内网地址
+mgw接口
+http://192.168.2.248:8081/mgw/taobao/queryPoints/5152/38ee9184c18fcb2fe3e69648b7be6f75
+http://192.168.2.248:8081/mgw/taobao/redeemPoints/5153/1/4000/3fe37342966e027be66a2d9cd4a77f59
+vbp接口POST
+http://192.168.5.207:6068/vbp/taobao/queryPoints
+7004
+
+
+
+外网映射
+gateway   116.236.229.43:8081
+melon     116.236.229.44:6066
+
+admin console
+http://paradiseadmin.ejinjiang.com/admin
+Aa123456
+
+
+QA admin
+http://192.168.5.17:8161  admin/admin
+
+UAT
+loadBalance  192.168.2.251:8081
+三台机器
+192.168.5.204：6068
+192.168.5.205：6066
+192.168.5.207：6068
+
+
+生产环境----------------------------------------------------------------------------------------------------------------------------------------------
+
+gateway 
+外网映射
+http://210.14.68.246:6067/mgw/member/keyInfoCheck/phone/13661891634
+
+内网
+172.24.88.29:6067
+
+
+线上问题
+查看数据库 192.168.2.180
+xingxing.zhang
+Jj123456
+memberg
+
+绿环境 mgw
+172.24.88.54:6069
+
+DB
+dataview  datamember1 oggdb
+dataview  viewer321 jjedb_standby
+
+测试链接 其他----------------------------------------------------------------------------------------------------------------
+http://localhost:8099/vbp/member/keyInfoCheck/asdf/asdf
+http://localhost:8099/vbp/member/keyInfoCheck/card_no/5656686461
+
+http://localhost:8099/vbp/member/validate
+<validationDto>
+<usernameOrCellphoneOrEmail>13510010009@qq.com</usernameOrCellphoneOrEmail>
+<password>E10ADC3949BA59ABBE56E057F20F883E</password>
+</validationDto>
+
+
+测试链接Taobao-----------------------------------------------------------------------------------------------------------------------------------------------
+注册绑定
+http://localhost:9999/membercenter/taobao/register?key=g0mV%2FOsF%2B4rA1KoTI%2FvtIg%3D%3D&taobao_level=F1
+http://localhost:9999/membercenter/taobao/register?key=RJ2mjGFYiOIRNWnij2Pwsw%3D%3D&taobao_level=F1
+
+查询积分
+http://116.236.229.43:5556/mgw/taobao/queryPoints/5555/55fc1c8dadd0c4022c1e3380003903a8
+
+兑换积分
+http://116.236.229.43:5556/mgw/taobao/redeemPoints/5153/1/4000/3fe37342966e027be66a2d9cd4a77f59
+
+JJE兑换积分
+http://banana.jje.com:9999/membercenter/taobao/redeem
+
+登陆
+http://cmsqa.jje.com:5555/passer/signin?go=http://banana.jje.com:9999/membercenter/taobao/redeem
+http://cmsqa.jje.com:5555/passer/signin?go=http://banana.jje.com:9999/score
+
+查看额度余额 vbp post
+http://116.236.229.43:5556/vbp/taobao/queryPoints
+9001
+
+http://116.236.229.43:5556/vbp/taobao/queryPointsFromJj
+1-8OIZRG
+
+剩余额度账户  9003   9004   8003    
+
+
+MISC-------------------------------------------------------------------------------------------------------------------------------------------------
+本地运行
+-Dtangosol.coherence.localhost=127.0.0.1 -Dtangosol.coherence.ttl=0 jetty:run
+-Dtangosol.coherence.localhost=127.0.0.1 -Dtangosol.coherence.ttl=0 -DXms512m -DXmx1024m -DXX:MaxNewSize=256m -DXX:MaxPermSize=256m jetty:run
+
+淘宝旅行
+http://trip.taobao.com/
+
+taobao账号
+omarkwyo  50183221
+binding ID
+
+
+无线密码
+90op()OP
+
+中英文切换
+/changeLanguage?locale=zh_CN
+/changeLanguage?locale=en_EN
+
+周报
+\\192.168.1.112\jje\CRM组周报\
+
+
+hosts
+C:\Windows\System32\drivers\etc
+127.0.0.1  banana.jje.com
+
+合代码
+sql
+properties
+需要单独提出来
+mvn clean install -Dmaven.test.skip=true
+
+共享
+\\192.168.2.33
+
+大数据文档
+svn://svn.jje.com/hadoop/branches/Doc/document/旅游推荐系统/209旅游板块接口设计.docx 
+
+我们这里的UAT发布好了
+Restful积分兑换接口请访问   116.236.229.43:8081
+Web用户注册绑定请访问       116.236.229.44:6066
+
+有问题的 MD5
+http://116.236.229.43:8081/mgw/taobao/redeemPoints/182529217/1/2000/0f1d4ccdee1b579609bfbabc41c9cd41
+
+json格式问题
+http://210.14.68.246:6067/mgw/taobao/queryPoints/5555/55fc1c8dadd0c4022c1e3380003903a8
+http://memberqa.jje.com:5555/mgw/taobao/queryPoints/5555/55fc1c8dadd0c4022c1e3380003903a8
+
+{"taobaoPointsQueryOutDto":{"allPoints":-1,"limitPoints":-1,"validate":"a25e2fe0e5df3388dbf36ed5ae97f33e"}}
+                           {"allPoints":-1,"limitPoints":-1,"validate":"a25e2fe0e5df3388dbf36ed5ae97f33e"}
+
+有问题的用户
+http://210.14.68.246:6067/mgw/taobao/queryPoints/59628917/25176ce3592c1df3b5510e4c28abde84
+
+
+CRM-UAT  http://192.168.2.111/loyalty_chs/
+CRM-QA  http://192.168.2.98/loyalty_chs/
+CRM-生产  http://crm.jinjiang.com/loyalty_chs/
+
+
+测试数据-----------------------------------------------------------------------------------------------------------------------------------------------
+QA
+'13510010008@qq.com','13510010009@qq.com','13510010010@qq.com',   -- 5001
+'13510010011@qq.com','13510010012@qq.com','13510010013@qq.com'     -- 6001
+'13510010016@qq.com','13510010017@qq.com','13510010018@qq.com',   -- 7001
+'13510010019@qq.com','13510010020@qq.com','13510010021@qq.com',   -- 8001
+'13510010022@qq.com','13510010023@qq.com','13510010024@qq.com',   -- 9001 
+'13510010025@qq.com'
+
+测试用户 UAT
+'13730300019wang@jinjiang.com',
+'13730300020wang@jinjiang.com',
+'13730300021wang@jinjiang.com',
+'13730300022wang@jinjiang.com',
+'13730300023wang@jinjiang.com',
+'13730300024wang@jinjiang.com',
+'13730300025wang@jinjiang.com',
+
+
+
+verify表----------------------------------
+id(145684 - 272996)
+
+
+新一轮淘宝UAT登陆测试----------------------------------------------------------------------------------------
+注册绑定
+http://116.236.229.44:6066/membercenter/taobao/register?key=dnMBlkz30PA%3D&taobao_level=F1   //999001
+登陆绑定  
+http://116.236.229.44:6066/membercenter/taobao/register?key=3IkF6%2BB5l8k%3D&taobao_level=F1   //999002
+13572319343@qq.com  13572319343
+验证
+SELECT * FROM demo.T_VBP_MEMBER_TAOBAO_BINDING where taobao_id in (999001, 999002);
+
+
+http://116.236.229.43:8081/mgw/taobao/queryPoints/999001/18d969970203b9126140be0ef846ac7e
+http://116.236.229.43:8081/mgw/taobao/redeemPoints/999001/1/1000/c7808d8b644ceeb7707a603394ac79e2
+http://116.236.229.43:8081/mgw/taobao/redeemPoints/999001/2/1000/26288be33ed8bcfb72f416083ae6680c
+http://116.236.229.43:8081/mgw/taobao/redeemPoints/999001/2/5000/30e556afa49a770ffbcb17a906859545
+
+
+
+统计重复手机号60404------------------------------------------------------------------------------
+select  i.phone, count(i.id)
+from jje_admin.MEMBER_MEM_INFO i
+where exists(select * from jje_admin.MEMBER_VERIFY v where i.phone=v.men_name)
+  and i.phone is not null
+group by i.phone 
+having count(i.id) >=2  
+
+
+
+现存问题
+1， 优惠券页面几乎都是后台读出来的， 没有翻译
+2， 城市控件
+3， 礼享网点 缺少翻译文案
+4， 忘记密码
+
+--------------------------------------------
+QA 直接修改 ftl
+/home/weblogic/Weblogic/user_projects/domains/InteQA_Domain123/servers/AdminServer/tmp/_WL_user/panda.war/q80f9g/war/WEB-INF/views/ftl/newcenter_en/order
+
+
+
+
+测试用户
+13900200020wang@jinjiang.com    1234567
+
+
+微信----------------------------------------
+表结构  
+T_NBP_WECHAT_MESSAGE
+T_NBP_TEMPLATE
+
+http://memberqa.jje.com:5555/nbp/weChat/sendMessage
+<weChatMessageDto>
+	<content>{"CheckInDate":"测试填充","name":"填充名字"}</content>
+	<id>0</id>
+	<module>CRM</module>
+	<priority>1</priority>
+	<templateNo>test_wechat_hotel_order</templateNo>
+	<wxReceiver>oDZWKjoenlA5n90RqmIxEQPxiqSQ</wxReceiver>
+</weChatMessageDto>
+
+
+小接口调整-----------------------------------------
+AppMemberResource -> getAppMemberByCode
+AppMemberDto增加2个成员变量
+1. register tag 为了取到是否是橘子平台
+2. MemberMemCard 当前锦江最高层级的卡
+
+http://memberqa.jje.com:5555/vbp/appMember/getAppMember/112233/true
+
+
+
+MemberResource -> addVIPMembership
+CRMResponseDto增加1个字段
+1. headRetmsg 取MemberRegisterResponse.getHead().getRetmsg()
+
+
+
+distinct all------------------
+ SELECT distinct M.*,V.PASSWORD FROM MEMBER_MEM_INFO M , MEMBER_VERIFY V
+        WHERE M.ID = V.Mem_Info_Id
+
+Story--------------------------------
+MsgStatisticsController 
+MsgStatisticsResource
+ShortMessageResoure
+MailResource
+MsgStatisticsRepostory.queryMsgStatistics
+
+信息完善确认.html
+我的账户首页 - 快速注册用户.html
+accountbase.css
+13110010025wang@jinjiang.com
+13110010026wang@jinjiang.com
+13110010024wang@jinjiang.com
+thomas.ye@jinjiang.com
+78qq@qq.com
+146463737384949@jinjiang.com
+
+UAT 
+12391032030wang@jinjiang.com    123456
+
+
+---
+CouponRuleManageController
+
+CouponSysIssueResource
+IssueRuleDto
+addCouponRule.jsp
+CouponRuleService
+
+CouponSysIssueResource
+CouponSysIssueService
+CouponSysIssueEvent
+
+http://memberqa.jje.com:5555/admin/coupon/rule/index
+http://memberqa.jje.com:5555/admin/coupon/rule/addRule
+http://memberqa.jje.com:5555/admin/coupon/rule/effective
+
+
+select * from t_cbp_coupon_rule r order by create_date desc;
+select * from t_coupon c order by c.create_date desc;
+select * from t_coupon_log order by id desc;
+
+
+SELECT * FROM T_CBP_COUPON_RULE r where rule_name like 'qqq%' --11517
+
+
+passer 登录连接-------------
+http://cmsqa.jje.com:5555/passer/signin?go=http://banana.jje.com:5555
+
+
+会议室 -----------------------------
+http://meeting.jje.com/day.php?year=2014&month=11&day=19&area=5
+lily.li   Jj123456
+
+
+生产环境调用接口 
+http://172.24.88.63:6066/cbp/wechat/lotteryNumber/765364
+
+
+
+
+
+CRM 接口联测----------------------------------
+CRM
+姓名 mergetuesday204
+mem_id     1-8QOPJW   
+会员编号  1-528552284
+
+对应的mem_info
+email t071
+mcCode 30671
+
+------
+CRM
+姓名 winnie_test4
+mem_id     1-5WLDKY   
+会员编号  1-357075970
+
+对应的mem_info
+email t070
+mcCode 30670
+
+----------------------------------
+生产环境cbp接口
+http://172.24.4.14:6068/cbp/wechat/lotteryNumber/765364
+
+---------------------------------------
+处理问题步骤
+1，原有功能还是新功能， 
+原有功能的话， 用原有数据测试是否ok --排除特殊数据的问题
+查看代码历史， 是否有过改动
+
+新功能需要提供报文，以便分层测试，确定是哪层出问题了。
+
+--------------------------------------
+首页样式问题
+index.ftl
+li{list-style:none}
+.box1 li{margin-bottom: 14px;}
+ul li
+
+---------------------------------------
+tnsnames.ora
+D:\oraclexe\app\oracle\product\10.2.0\server\NETWORK\ADMIN\tnsnames.ora
+
+
+
+
+PMS西软数据导入Hadoop	   	2.00	2014/12/1	2014/12/5
+网站登录安全信息采集	   	2.00	2014/12/8	2014/12/12		2014/12/16
+自动化服务开发	   	3.00	2014/12/15	2014/12/19		2014/12/31
+模拟大量用户点击、搜索行为的操作界面开发和后台功能 	   	2.00	2014/12/22	2014/12/29
+用户行为检测脚步优化 1	   	1.00	2014/12/30	2014/12/31
+
+
+
+Task----------------------------------------
+
+堡垒机
+确定 accnt 是唯一的
+getdate() - 3  使用oracle的语言  --done
+
+sqoop 参数
+自己装个sqoop
+
+nbp代码 
+1> 模板维护
+2> 模板渲染
+3> 大数据推荐
+
+
+其他3个SQL
+
+
+select trim(translate('  abc 
+a
+afa
+bc  ',chr(13)||chr(10),',')) from dual;
+
+
+
+
+-----------------
+scan 'PMS_CUX_PMS_HACCOUNT_MAP', LIMIT=>2
+get 'PMS_CUX_PMS_HACCOUNT_MAP','F411260105#31000019#4'
+describe 'PMS_CUX_PMS_HACCOUNT_MAP'
+disable 'PMS_CUX_PMS_HACCOUNT_MAP'
+drop 'PMS_CUX_PMS_HACCOUNT_MAP'
+count 'PMS_CUX_PMS_HACCOUNT_MAP'
+count 'TestTable',CACHE=>1000, INTERVAL => 100000 
+
+truncate ''
+
+--------------------
+积分兑换怀疑  loadBalance 问题
+-bash-3.2$ grep J123450838980 vbp.log
+2014-11-26 19:35:23,871 ERROR [com.jje.vbp.mall.service.MemberMallService] [7b9230b6-002b-497c-9869-cfbf8ac8e549#172.24.4.2:6066] - 202??????:???????:MallScoreDeductDto [mcMemberCode=4021991, productId=J234, points=12000, transDate=Wed Nov 26 19:35:53 CST 2014, orderNum=J123450838980, callId=, partnerCard=, sid=7, uname=???, umobile=13753857266, channel=JJMALL, issueCount=1];??:<?xml version="1.0" encoding="UTF-8" standalone="yes"?><response><head><transcode>30015</transcode><systype>JJ000</systype><retcode>00202</retcode><retmsg>????????!(SBL-EXL-00151)</retmsg></head><body><membid>JJS1963245</membid><remsg>????????!(SBL-EXL-00151)</remsg><recode>00202</recode></body></response>
+2014-11-26 19:35:23,871 ERROR [com.jje.vbp.mall.service.MemberMallService] [7b9230b6-002b-497c-9869-cfbf8ac8e549#172.24.4.2:6066] - ??????:????;??:MallScoreDeductDto [mcMemberCode=4021991, productId=J234, points=12000, transDate=Wed Nov 26 19:35:53 CST 2014, orderNum=J123450838980, callId=, partnerCard=, sid=7, uname=???, umobile=13753857266, channel=JJMALL, issueCount=1]
+
+
+cux_pms_guest      268465    268411
+cux_pms_haccount  1689107   1640181
+cux_pms_hmaster    303122    294277
+
+---------------------
+ShortMessageResoure
+public方法的说明
+
+SupplierConfigDto  config 有什么用 
+T_NBP_SUPPLIER_CONFIG 表都没有了 
+SmsMessageProducer 和 BatchSmsMessageProducer 有什么区别
+没有看到哪里 将模板和content 渲染出来
+
+谁会调用发送短信的接口
+
+
+邮件
+智能推荐
+
+------------------------
+阅读源代码
+旅游
+  热门目的地	盛尧
+酒店		
+	用户偏好地理纬度特征分析	盛尧
+  热门酒店和热门城市	盛尧
+
+
+---------------
+192.168.5.195 transwarp-195
+member/Jj123456
+
+
+----------------------
+热门目的地
+对于所有用户的各种行为记录（交易、订单、网站行为）的线路的所有目的地，根据主题（包括国内、出境、自由行、邮轮/海岛）划分，并且按时间衰减，获取TopN
+对于主题为国内的目的地再将其计算与上海的距离<500km的定义为新的主题“周边游”
+
+TB_REC_LINE_DES_TOPIC
+TB_REC_CH_SITE_HEAT_TOPN
+
+StatSiteHeatRankTopN
+StatLineDestinationAndTopic
+
+--------------------------
+用户偏好地理纬度特征分析
+TB_REC_CH_USER_PREFERENCE
+TB_REC_CH_USER_GEOGRAPHIC
+TB_REC_CH_USER_TIME_GEOGRAPHIC
+
+
+
+------------------------
+TB_REC_CH_HOTEL_HEAT
+TB_REC_CH_HOTEL_HEAT_TOPN
+TB_REC_CH_CITY_HEAT
+TB_REC_CH_CITY_HEAT_TOPN
+TB_REC_CH_HOTEL_TAG_HEAT_TOPN
+
+
+
+-------------------------
+{\"remoteHost\":\"127.0.0.1\",\"remotePort\":\"52569\",\"serverName\":\"passer.jje.com\",\"serverPort\":\"8899\",\"method\":\"POST\",\"contextPath\":\"/passer\",\"servletPath\":\"/signin\",\"queryString\":null,\"realIp\":\"127.0.0.1\",\"header\":\"{\"Accept-Language\":\"en-US,en;q=0.8,zh-CN;q=0.6,zh;q=0.4\",\"Cookie\":\"JSESSIONID=1xk20nqwg82x11qlzy6fdhtuei; _JJE_EXP_=e9ae82b9-a6c8-425e-a890-303af67d2e6a; __ozlvd1789=1416558340\",\"Host\":\"passer.jje.com:8899\",\"Content-Length\":\"204\",\"Accept-Encoding\":\"gzip,deflate\",\"Referer\":\"http://passer.jje.com:8899/passer/signin?go=http%3A%2F%2Fwww.jinjiang.com\",\"User-Agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.122 Safari/537.36\",\"Origin\":\"http://passer.jje.com:8899\",\"Connection\":\"keep-alive\",\"Content-Type\":\"application/x-www-form-urlencoded\",\"Accept\":\"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8\",\"Cache-Control\":\"max-age=0\"}\",\"cookie\":\"{\"_JJE_EXP_\":\"e9ae82b9-a6c8-425e-a890-303af67d2e6a\",\"JSESSIONID\":\"1xk20nqwg82x11qlzy6fdhtuei\",\"__ozlvd1789\":\"1416558340\"}\",\"param\":\"{\"_csrf\":\"ad3faba1-bfd7-4a59-a166-4782c0fbce4a\",\"userName\":\"13916456886\",\"newValidateCode\":\"2\",\"needValidateCode\":\"1\",\"password\":\"******\",\"go\":\"http://www.jinjiang.com\"}\"}
+
+
+
+------------
+***********************************************NEW NEW UAT***UAT新新环境(SIT)***NEW NEW UAT**************************************
+&.http://192.168.2.248:80
+&.XBP 192.168.5.204:6068
+&.XBP 192.168.5.205:6066
+&.XBP 192.168.5.207:6068
+&.http://paradise.ejinjiang.com/ 网站平台
+&.http://pre.jinjianghotels.com/ pre 绿环境 阿凡达
+&.SSO 认证中心 http://paradise.ejinjiang.com/passer/login
+&.会员中心 http://paradiseclub.ejinjiang.com/
+&.Admin http://paradiseadmin.ejinjiang.com/admin
+&.Avatar http://paradisejinjianghotels.ejinjiang.com/
+&.大客户 http://paradisebc.ejinjiang.com/
+&.Mobile web http://paradisem.ejinjiang.com
+
+
+
+
+大数据-----------------------------------------------------
+Azkaban
+https://172.24.104.3:8443/   azkaban/azkaban
+
+QA
+192.168.5.195 transwarp-195
+member/Jj123456
+root/111111
+
+
+堡垒机
+116.236.229.44/mobile/auth/login.aspx
+
+远程桌面
+192.168.5.100
+
+
+\\192.168.2.33\jjefs\Public\IT常用工具下载\大数据
+
+生产环境 
+root Aa123456
+-----------------------
+
+
+---------------
+
+被注册 
+WebMemberResource.regist
+
+
+-------------------
+195
+transwarp -t -h localhost
+走的是本机spark
+
+transwarp localhost
+走的是mapreduce
+
+------------------------------
+UAT
+dbp
+192.168.5.204:6068
+192.168.5.205:6066
+192.168.5.207:6068
+
+
+
+192.168.100.200:8180
+
+大数据 memberID--------------------------
+JJ000_SIEBEL_S_LOY_MEMBER_MAP
+JJ000_SIEBEL_S_CONTACT_MAP
+JJ000_SIEBEL_MEMBER_MERGE_MAP
+
+count 'JJ000_SIEBEL_S_LOY_MEMBER_MAP',CACHE=>1000, INTERVAL => 100000 
+15048336 row(s) in 207.6460 seconds
+
+count 'JJ000_SIEBEL_S_LOY_MEMBER_MAP',CACHE=>10000, INTERVAL => 1000000
+15048336 row(s) in 188.2880 seconds
+
+
+/usr/lib/ngmr/run_app /home/member/tristan/jje-bentley-1.0-SNAPSHOT.jar com.jinjiang.merge.MergeMemberAndContactData ngmr-yarn-client /home/member/tristan/jje-bentley-1.0-SNAPSHOT.jar > a.log
+/usr/lib/ngmr/run_app /home/member/tristan/jje-bentley-1.0-SNAPSHOT.jar com.jinjiang.merge.MergeMemberAndContactDataIncrement ngmr-yarn-client /home/member/tristan/jje-bentley-1.0-SNAPSHOT.jar > a.log
+/usr/lib/ngmr/run_app /home/member/tristan/jje-bentley-1.0-SNAPSHOT.jar com.jinjiang.merge.MemberContactMappingAll ngmr-yarn-client /home/member/tristan/jje-bentley-1.0-SNAPSHOT.jar > a.log
+/usr/lib/ngmr/run_app /home/member/tristan/jje-bentley-1.0-SNAPSHOT.jar com.jinjiang.merge.MergeContactAll ngmr-yarn-client /home/member/tristan/jje-bentley-1.0-SNAPSHOT.jar > a.log
+
+
+760156 [main] INFO org.apache.spark.SparkContext - Job finished: saveAsHadoopDataset at MergeMemberAndContactData.java:83, took 739.890350869 s
+
+15048336 row(s) in 250.0420 seconds
+
+
+put 'JJ000_SIEBEL_S_LOY_MEMBER_MAP','1-1011TQ','info:LAST_UPD','2014-12-23 08:35:37'
+1-1011TQ   1-1011TT
+
+
+
+-------------------------------------
+2、 订单成功页添加监测代码
+3、 订单成功详情页添加监测代码
+4、 订单预订确认页添加监测代码
+
+旅游
+预定成功 http://www.jinjiang.com/travel/order/save
+详情页   http://www.jinjiang.com/member/travel/order/ODE2ODI5
+预订确认 http://www.jinjiang.com/travel/lineInfo/bookingnew/1355320
+
+酒店
+预订页   http://www.jinjiang.com/hotel/order/booking?plan.id=45705&startDate=2014-12-27&endDate=2014-12-28&roomNum=1&adultNum=1&rateCode=PL2D9&anchor=&bookingOrigin=
+预订确认 http://www.jinjiang.com/hotel/order/bookingCheck
+完成预订 http://www.jinjiang.com/hotel/order/bookingResult/402184?isScorePay=false&staticServerUrl=http%3A%2F%2Fstatic.jinjiang.com%2Fopt%2Fstatic%2F
+
+
+
