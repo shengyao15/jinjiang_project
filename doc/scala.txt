@@ -1,0 +1,58 @@
+//scala----------------------------------------------
+//def
+def min(x:Int,y:Int):Int={
+var a=x
+if(x>y) a=y
+return a
+}
+
+//while
+var m=3 
+while(m!=0){ 
+print(m) 
+m-=1
+} 
+
+//for
+for(i <-1 to 4)
+println("No."+ i)
+
+for(i <-1 to 4){
+  if(i%2==0){
+    if(i!=2){
+      println("No."+ i)
+    }
+  }
+}
+
+
+for(i <-1 to 4;if i%2==0;if i!=2)println( i)
+
+
+val No=
+for(i <-1 to 4)
+yield i
+
+
+val name=readLine("Your name:\n");
+
+def sign(m:Int)={
+m%3 match{
+case 0 => "wrong"
+case 1 => "A"
+case 2 => "\123"
+}}
+val a=58
+val b=sign(a)
+val c=sign(a+2)
+println(b+c)
+
+
+//สýื้
+val A=new Array[Int](10)
+A(7)=57
+val B=A.toBuffer
+B.remove(2,2)
+for(i <-1 to (B.length,2)) print(B(i))
+
+

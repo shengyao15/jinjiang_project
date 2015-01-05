@@ -1,0 +1,237 @@
+192.168.5.195 transwarp-195
+member/Jj123456
+
+
+----------------------
+热门目的地
+对于所有用户的各种行为记录（交易、订单、网站行为）的线路的所有目的地，根据主题（包括国内、出境、自由行、邮轮/海岛）划分，并且按时间衰减，获取TopN
+对于主题为国内的目的地再将其计算与上海的距离<500km的定义为新的主题“周边游”
+
+TB_REC_LINE_DES_TOPIC
+TB_REC_CH_SITE_HEAT_TOPN
+
+StatSiteHeatRankTopN
+StatLineDestinationAndTopic
+
+--------------------------
+用户偏好地理纬度特征分析
+TB_REC_CH_USER_PREFERENCE
+TB_REC_CH_USER_GEOGRAPHIC
+TB_REC_CH_USER_TIME_GEOGRAPHIC
+
+
+
+------------------------
+TB_REC_CH_HOTEL_HEAT
+TB_REC_CH_HOTEL_HEAT_TOPN
+TB_REC_CH_CITY_HEAT
+TB_REC_CH_CITY_HEAT_TOPN
+TB_REC_CH_HOTEL_TAG_HEAT_TOPN
+
+
+
+-------------------------
+{\"remoteHost\":\"127.0.0.1\",\"remotePort\":\"52569\",\"serverName\":\"passer.jje.com\",\"serverPort\":\"8899\",\"method\":\"POST\",\"contextPath\":\"/passer\",\"servletPath\":\"/signin\",\"queryString\":null,\"realIp\":\"127.0.0.1\",\"header\":\"{\"Accept-Language\":\"en-US,en;q=0.8,zh-CN;q=0.6,zh;q=0.4\",\"Cookie\":\"JSESSIONID=1xk20nqwg82x11qlzy6fdhtuei; _JJE_EXP_=e9ae82b9-a6c8-425e-a890-303af67d2e6a; __ozlvd1789=1416558340\",\"Host\":\"passer.jje.com:8899\",\"Content-Length\":\"204\",\"Accept-Encoding\":\"gzip,deflate\",\"Referer\":\"http://passer.jje.com:8899/passer/signin?go=http%3A%2F%2Fwww.jinjiang.com\",\"User-Agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.122 Safari/537.36\",\"Origin\":\"http://passer.jje.com:8899\",\"Connection\":\"keep-alive\",\"Content-Type\":\"application/x-www-form-urlencoded\",\"Accept\":\"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8\",\"Cache-Control\":\"max-age=0\"}\",\"cookie\":\"{\"_JJE_EXP_\":\"e9ae82b9-a6c8-425e-a890-303af67d2e6a\",\"JSESSIONID\":\"1xk20nqwg82x11qlzy6fdhtuei\",\"__ozlvd1789\":\"1416558340\"}\",\"param\":\"{\"_csrf\":\"ad3faba1-bfd7-4a59-a166-4782c0fbce4a\",\"userName\":\"13916456886\",\"newValidateCode\":\"2\",\"needValidateCode\":\"1\",\"password\":\"******\",\"go\":\"http://www.jinjiang.com\"}\"}
+
+
+
+
+
+
+大数据-----------------------------------------------------
+Azkaban
+https://172.24.104.3:8443/   azkaban/azkaban
+
+QA
+192.168.5.195 transwarp-195
+member/Jj123456
+root/111111
+
+
+堡垒机
+116.236.229.44/mobile/auth/login.aspx
+
+远程桌面
+192.168.5.100
+
+
+\\192.168.2.33\jjefs\Public\IT常用工具下载\大数据
+
+生产环境 
+root Aa123456
+
+2、 订单成功页添加监测代码
+3、 订单成功详情页添加监测代码
+4、 订单预订确认页添加监测代码
+
+旅游
+预定成功 http://www.jinjiang.com/travel/order/save
+详情页   http://www.jinjiang.com/member/travel/order/ODE2ODI5
+预订确认 http://www.jinjiang.com/travel/lineInfo/bookingnew/1355320
+
+酒店
+预订页   http://www.jinjiang.com/hotel/order/booking?plan.id=45705&startDate=2014-12-27&endDate=2014-12-28&roomNum=1&adultNum=1&rateCode=PL2D9&anchor=&bookingOrigin=
+预订确认 http://www.jinjiang.com/hotel/order/bookingCheck
+完成预订 http://www.jinjiang.com/hotel/order/bookingResult/402184?isScorePay=false&staticServerUrl=http%3A%2F%2Fstatic.jinjiang.com%2Fopt%2Fstatic%2F
+
+
+--------------------------------
+旅游
+预定确认页
+http://www.jinjiang.com/travel/lineInfo/bookingnew/1383234
+页面
+views\travel\line\order.jsp
+关键字
+travel/lineInfo/bookingnew
+
+成功页
+views\travel\order\bookingSuccess.jsp 
+关键字
+travel/order/save
+
+  
+成功详情页
+views\travel\order\detail.jsp 
+关键字
+travel/order
+
+
+酒店
+预定确认页 http://www.jinjiang.com/hotel/order/bookingCheck
+views\hotels\hotel\bookingCheck.jsp
+关键字
+hotel/order/bookingCheck
+
+成功页
+views\hotels\hotel\bookingResult.jsp
+关键字
+hotel/order/bookingResult
+
+------------
+旅游
+预定确认页
+views\travel\line\order.jsp
+关键字
+travel/lineInfo/bookingnew
+
+成功页
+views\travel\order\bookingSuccess.jsp 
+关键字
+travel/order/save
+
+  
+成功详情页
+views\travel\order\detail.jsp 
+关键字
+travel/order
+
+
+酒店
+预定确认页 
+views\hotels\hotel\bookingCheck.jsp
+关键字
+hotel/order/bookingCheck
+
+成功页
+views\hotels\hotel\bookingResult.jsp
+关键字
+hotel/order/bookingResult
+
+---------------------------
+
+优惠券状态
+CouponCommonType
+
+put 'JJ000_SIEBEL_S_LOY_MEMBER_MAP','tristan01','info:PR_CON_ID','tristan01-FK'
+put 'JJ000_SIEBEL_S_LOY_MEMBER_MAP','tristan01','info:LAST_UPD','2014-12-29 12:12:12'
+put 'JJ000_SIEBEL_S_LOY_MEMBER_MAP','tristan01','info:CREATED','2014-12-29 12:12:12'
+
+put 'JJ000_SIEBEL_S_LOY_MEMBER_MAP','tristan02','info:PR_CON_ID','tristan02-FK'
+put 'JJ000_SIEBEL_S_LOY_MEMBER_MAP','tristan02','info:LAST_UPD','2014-12-29 12:12:12'
+put 'JJ000_SIEBEL_S_LOY_MEMBER_MAP','tristan02','info:CREATED','2014-12-29 12:12:12'
+
+put 'JJ000_SIEBEL_S_LOY_MEMBER_MAP','tristan03','info:PR_CON_ID','tristan03-FK'
+put 'JJ000_SIEBEL_S_LOY_MEMBER_MAP','tristan03','info:LAST_UPD','2014-12-29 12:12:12'
+put 'JJ000_SIEBEL_S_LOY_MEMBER_MAP','tristan03','info:CREATED','2014-12-29 12:12:12'
+
+
+
+put 'JJ000_SIEBEL_S_CONTACT_MAP','tristan01-FK','info:LAST_NAME','This is a war'
+put 'JJ000_SIEBEL_S_CONTACT_MAP','tristan01-FK','info:LAST_UPD','2014-12-29 12:12:12'
+
+put 'JJ000_SIEBEL_S_CONTACT_MAP','tristan02-FK','info:LAST_NAME','This is a war2'
+put 'JJ000_SIEBEL_S_CONTACT_MAP','tristan02-FK','info:LAST_UPD','2014-12-29 12:12:12'
+
+put 'JJ000_SIEBEL_S_CONTACT_MAP','tristan04-FK','info:LAST_NAME','This is a war4'
+put 'JJ000_SIEBEL_S_CONTACT_MAP','tristan04-FK','info:LAST_UPD','2014-12-29 12:12:12'
+
+put 'JJ000_SIEBEL_S_CONTACT_MAP','tristan05-FK','info:LAST_NAME','This is a war5'
+put 'JJ000_SIEBEL_S_CONTACT_MAP','tristan05-FK','info:LAST_UPD','2014-12-29 12:12:12'
+
+---------------------------
+yarn application -list
+yarn application -kill -9 xxx
+
+
+-------------------
+195
+transwarp -t -h localhost
+走的是本机spark
+
+transwarp localhost
+走的是mapreduce
+
+------------------------------
+UAT
+dbp
+192.168.5.204:6068
+192.168.5.205:6066
+192.168.5.207:6068
+
+
+
+192.168.100.200:8180
+
+大数据 memberID--------------------------
+JJ000_SIEBEL_S_LOY_MEMBER_MAP
+JJ000_SIEBEL_S_CONTACT_MAP
+JJ000_SIEBEL_MEMBER_MERGE_MAP
+
+count 'JJ000_SIEBEL_S_LOY_MEMBER_MAP',CACHE=>1000, INTERVAL => 100000 
+15048336 row(s) in 207.6460 seconds
+
+count 'JJ000_SIEBEL_S_LOY_MEMBER_MAP',CACHE=>10000, INTERVAL => 1000000
+15048336 row(s) in 188.2880 seconds
+
+
+/usr/lib/ngmr/run_app /home/member/tristan/jje-bentley-1.0-SNAPSHOT.jar com.jinjiang.merge.MergeMemberAndContactData ngmr-yarn-client /home/member/tristan/jje-bentley-1.0-SNAPSHOT.jar > a.log
+/usr/lib/ngmr/run_app /home/member/tristan/jje-bentley-1.0-SNAPSHOT.jar com.jinjiang.merge.MergeMemberAndContactDataIncrement ngmr-yarn-client /home/member/tristan/jje-bentley-1.0-SNAPSHOT.jar > a.log
+/usr/lib/ngmr/run_app /home/member/tristan/jje-bentley-1.0-SNAPSHOT.jar com.jinjiang.merge.MemberContactMappingAll ngmr-yarn-client /home/member/tristan/jje-bentley-1.0-SNAPSHOT.jar > a.log
+/usr/lib/ngmr/run_app /home/member/tristan/jje-bentley-1.0-SNAPSHOT.jar com.jinjiang.merge.MergeContactAll ngmr-yarn-client /home/member/tristan/jje-bentley-1.0-SNAPSHOT.jar > a.log
+/usr/lib/ngmr/run_app /home/member/tristan/jje-bentley-1.0-SNAPSHOT.jar com.jinjiang.merge.MemberContactMappingAll ngmr-yarn-client /home/member/tristan/jje-bentley-1.0-SNAPSHOT.jar > a.log
+/usr/lib/ngmr/run_app ./jje-bentley-1.0-SNAPSHOT.jar com.jinjiang.merge.MemberMergeAll ngmr-yarn-client ./jje-bentley-1.0-SNAPSHOT.jar > a.log
+
+760156 [main] INFO org.apache.spark.SparkContext - Job finished: saveAsHadoopDataset at MergeMemberAndContactData.java:83, took 739.890350869 s
+
+15048336 row(s) in 250.0420 seconds
+
+
+put 'JJ000_SIEBEL_S_LOY_MEMBER_MAP','1-1011TQ','info:LAST_UPD','2014-12-23 08:35:37'
+1-1011TQ   1-1011TT
+
+
+
+---------------------------------------------------------------------------------
+spark 0.9.1
+hadoop 2.2
+scala 2.10
+
+spark 路径 
+/usr/lib/ngmr
+
+hadoop 路径
+/etc/hadoop/conf
+
+
+
+

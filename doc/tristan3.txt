@@ -1,7 +1,3 @@
-
-
-
-
 QA环境----------------------------------------------------------------------------------------------------------------------------------------------
 QA环境端口映射
 网站  116.236.229.43:5556
@@ -627,7 +623,8 @@ count 'JJ000_SIEBEL_S_LOY_MEMBER_MAP',CACHE=>10000, INTERVAL => 1000000
 /usr/lib/ngmr/run_app /home/member/tristan/jje-bentley-1.0-SNAPSHOT.jar com.jinjiang.merge.MergeMemberAndContactDataIncrement ngmr-yarn-client /home/member/tristan/jje-bentley-1.0-SNAPSHOT.jar > a.log
 /usr/lib/ngmr/run_app /home/member/tristan/jje-bentley-1.0-SNAPSHOT.jar com.jinjiang.merge.MemberContactMappingAll ngmr-yarn-client /home/member/tristan/jje-bentley-1.0-SNAPSHOT.jar > a.log
 /usr/lib/ngmr/run_app /home/member/tristan/jje-bentley-1.0-SNAPSHOT.jar com.jinjiang.merge.MergeContactAll ngmr-yarn-client /home/member/tristan/jje-bentley-1.0-SNAPSHOT.jar > a.log
-
+/usr/lib/ngmr/run_app /home/member/tristan/jje-bentley-1.0-SNAPSHOT.jar com.jinjiang.merge.MemberContactMappingAll ngmr-yarn-client /home/member/tristan/jje-bentley-1.0-SNAPSHOT.jar > a.log
+/usr/lib/ngmr/run_app ./jje-bentley-1.0-SNAPSHOT.jar com.jinjiang.merge.MemberMergeAll ngmr-yarn-client ./jje-bentley-1.0-SNAPSHOT.jar > a.log
 
 760156 [main] INFO org.apache.spark.SparkContext - Job finished: saveAsHadoopDataset at MergeMemberAndContactData.java:83, took 739.890350869 s
 
@@ -654,5 +651,102 @@ put 'JJ000_SIEBEL_S_LOY_MEMBER_MAP','1-1011TQ','info:LAST_UPD','2014-12-23 08:35
 预订确认 http://www.jinjiang.com/hotel/order/bookingCheck
 完成预订 http://www.jinjiang.com/hotel/order/bookingResult/402184?isScorePay=false&staticServerUrl=http%3A%2F%2Fstatic.jinjiang.com%2Fopt%2Fstatic%2F
 
+
+--------------------------------
+旅游
+预定确认页
+http://www.jinjiang.com/travel/lineInfo/bookingnew/1383234
+页面
+views\travel\line\order.jsp
+关键字
+travel/lineInfo/bookingnew
+
+成功页
+views\travel\order\bookingSuccess.jsp 
+关键字
+travel/order/save
+
+  
+成功详情页
+views\travel\order\detail.jsp 
+关键字
+travel/order
+
+
+酒店
+预定确认页 http://www.jinjiang.com/hotel/order/bookingCheck
+views\hotels\hotel\bookingCheck.jsp
+关键字
+hotel/order/bookingCheck
+
+成功页
+views\hotels\hotel\bookingResult.jsp
+关键字
+hotel/order/bookingResult
+
+------------
+旅游
+预定确认页
+views\travel\line\order.jsp
+关键字
+travel/lineInfo/bookingnew
+
+成功页
+views\travel\order\bookingSuccess.jsp 
+关键字
+travel/order/save
+
+  
+成功详情页
+views\travel\order\detail.jsp 
+关键字
+travel/order
+
+
+酒店
+预定确认页 
+views\hotels\hotel\bookingCheck.jsp
+关键字
+hotel/order/bookingCheck
+
+成功页
+views\hotels\hotel\bookingResult.jsp
+关键字
+hotel/order/bookingResult
+
+---------------------------
+
+优惠券状态
+CouponCommonType
+
+put 'JJ000_SIEBEL_S_LOY_MEMBER_MAP','tristan01','info:PR_CON_ID','tristan01-FK'
+put 'JJ000_SIEBEL_S_LOY_MEMBER_MAP','tristan01','info:LAST_UPD','2014-12-29 12:12:12'
+put 'JJ000_SIEBEL_S_LOY_MEMBER_MAP','tristan01','info:CREATED','2014-12-29 12:12:12'
+
+put 'JJ000_SIEBEL_S_LOY_MEMBER_MAP','tristan02','info:PR_CON_ID','tristan02-FK'
+put 'JJ000_SIEBEL_S_LOY_MEMBER_MAP','tristan02','info:LAST_UPD','2014-12-29 12:12:12'
+put 'JJ000_SIEBEL_S_LOY_MEMBER_MAP','tristan02','info:CREATED','2014-12-29 12:12:12'
+
+put 'JJ000_SIEBEL_S_LOY_MEMBER_MAP','tristan03','info:PR_CON_ID','tristan03-FK'
+put 'JJ000_SIEBEL_S_LOY_MEMBER_MAP','tristan03','info:LAST_UPD','2014-12-29 12:12:12'
+put 'JJ000_SIEBEL_S_LOY_MEMBER_MAP','tristan03','info:CREATED','2014-12-29 12:12:12'
+
+
+
+put 'JJ000_SIEBEL_S_CONTACT_MAP','tristan01-FK','info:LAST_NAME','This is a war'
+put 'JJ000_SIEBEL_S_CONTACT_MAP','tristan01-FK','info:LAST_UPD','2014-12-29 12:12:12'
+
+put 'JJ000_SIEBEL_S_CONTACT_MAP','tristan02-FK','info:LAST_NAME','This is a war2'
+put 'JJ000_SIEBEL_S_CONTACT_MAP','tristan02-FK','info:LAST_UPD','2014-12-29 12:12:12'
+
+put 'JJ000_SIEBEL_S_CONTACT_MAP','tristan04-FK','info:LAST_NAME','This is a war4'
+put 'JJ000_SIEBEL_S_CONTACT_MAP','tristan04-FK','info:LAST_UPD','2014-12-29 12:12:12'
+
+put 'JJ000_SIEBEL_S_CONTACT_MAP','tristan05-FK','info:LAST_NAME','This is a war5'
+put 'JJ000_SIEBEL_S_CONTACT_MAP','tristan05-FK','info:LAST_UPD','2014-12-29 12:12:12'
+
+---------------------------
+yarn application -list
+yarn application -kill -9 xxx
 
 

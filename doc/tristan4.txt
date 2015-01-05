@@ -1,0 +1,152 @@
+QA环境----------------------------------------------------------------------------------------------------------------------------------------------
+QA环境端口映射
+网站  116.236.229.43:5556
+图片资源 116.236.229.44:8005
+
+内部控制台
+http://memberqa.jje.com:5555/admin
+tester/Aa123456
+
+weblogic控制台
+http://memberqa.jje.com:5555/console
+weblogic
+weblogic123
+
+日志
+/logs/integration_fixbug/vbp.log
+
+
+secureCRT
+memberqa
+192.168.5.6
+weblogic
+weblogic123
+
+bananaqa
+192.168.5.138
+weblogic / root    sudo reboot
+123456
+
+重启weblogic
+/home/weblogic/Weblogic/user_projects/domains/InteQA_Domain123
+nohup startWebLogic.sh &
+
+DB
+jdbc:oracle:thin:@192.168.5.7:1521:Testqa
+memberqa
+654321
+
+QA 直接修改 ftl
+/home/weblogic/Weblogic/user_projects/domains/InteQA_Domain123/servers/AdminServer/tmp/_WL_user/panda.war/q80f9g/war/WEB-INF/views/ftl/newcenter_en/order
+
+passer 登录连接
+http://cmsqa.jje.com:5555/passer/signin?go=http://banana.jje.com:5555
+
+
+被注册 
+WebMemberResource.regist
+
+UAT环境----------------------------------------------------------------------------------------------------------------------------------------------
+web
+http://paradise.ejinjiang.com/
+http://192.168.5.207:6068/vbp/score/queryChannelScore
+
+DB
+192.168.5.8  1521   autodb
+dataview/123456
+demo.xxx
+
+log
+\\192.168.1.220\imgdir 3\uat\3uat\bp\6066
+
+jekins
+http://jenkins.jje.com/view/r-3uat-pl/
+
+gateway
+http://192.168.2.248:8081/mgw/member/keyInfoCheck/card_no/6500014112
+
+admin console
+http://paradiseadmin.ejinjiang.com/admin
+Aa123456
+
+
+QA admin
+http://192.168.5.17:8161  admin/admin
+
+UAT
+loadBalance  192.168.2.251:8081
+三台机器
+192.168.5.204:6068
+192.168.5.205:6066
+192.168.5.207:6068
+
+
+生产环境----------------------------------------------------------------------------------------------------------------------------------------------
+
+gateway 
+外网映射
+http://210.14.68.246:6067/mgw/member/keyInfoCheck/phone/13661891634
+
+内网
+172.24.88.29:6067
+
+
+线上问题
+查看数据库 192.168.2.180
+xingxing.zhang
+Jj123456
+memberg
+
+绿环境 mgw
+172.24.88.54:6069
+
+DB
+dataview  datamember1 oggdb
+dataview  viewer321 jjedb_standby
+
+cbp接口
+http://172.24.4.14:6068/cbp/wechat/lotteryNumber/765364
+
+MISC-------------------------------------------------------------------------------------------------------------------------------------------------
+本地运行
+-Dtangosol.coherence.localhost=127.0.0.1 -Dtangosol.coherence.ttl=0 jetty:run
+-Dtangosol.coherence.localhost=127.0.0.1 -Dtangosol.coherence.ttl=0 -DXms512m -DXmx1024m -DXX:MaxNewSize=256m -DXX:MaxPermSize=256m jetty:run
+
+
+
+无线密码
+90op()OP
+
+中英文切换
+/changeLanguage?locale=zh_CN
+/changeLanguage?locale=en_EN
+
+周报
+\\192.168.1.112\jje\CRM组周报\
+
+
+hosts
+C:\Windows\System32\drivers\etc
+127.0.0.1  banana.jje.com
+
+合代码
+sql
+properties
+需要单独提出来
+
+mvn clean install -Dmaven.test.skip=true
+
+共享
+\\192.168.2.33
+
+CRM-UAT  http://192.168.2.111/loyalty_chs/
+CRM-QA  http://192.168.2.98/loyalty_chs/
+CRM-生产  http://crm.jinjiang.com/loyalty_chs/
+
+
+会议室
+http://meeting.jje.com/day.php?year=2014&month=11&day=19&area=5
+lily.li   Jj123456
+
+tnsnames.ora
+D:\oraclexe\app\oracle\product\10.2.0\server\NETWORK\ADMIN\tnsnames.ora

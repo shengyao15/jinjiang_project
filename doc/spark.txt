@@ -1,0 +1,8 @@
+./bin/spark-shell
+
+//spark practise
+val lines = sc.textFile("README.md")   
+lines.count()   
+lines.first()   
+val pythonLines = lines.filter(line => line.contains("Python"))   
+pythonLines.first()  

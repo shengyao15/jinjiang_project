@@ -1,0 +1,19 @@
+CRM 接口联测----------------------------------
+CRM
+姓名 mergetuesday204
+mem_id     1-8QOPJW   
+会员编号  1-528552284
+
+对应的mem_info
+email t071
+mcCode 30671
+
+------
+CRM
+姓名 winnie_test4
+mem_id     1-5WLDKY   
+会员编号  1-357075970
+
+对应的mem_info
+email t070
+mcCode 30670
