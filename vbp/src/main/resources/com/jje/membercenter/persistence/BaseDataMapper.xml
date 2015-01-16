@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jje.membercenter.persistence.BaseDataMapper">
+
+	<resultMap id="basedataResult" type="basedata">
+		<id property="rowId" column="ROW_ID" />
+		<id property="parRowId" column="PAR_ROW_ID" />
+		<id property="name" column="NAME" />
+		<id property="type" column="TYPE" />
+		<id property="val" column="VAL" />
+	</resultMap>
+	<select id="listMemberType" resultMap="basedataResult">
+		Select ROW_ID,PAR_ROW_ID,NAME,TYPE,VAL From S_LST_OF_VAL Where TYPE = 'LOY_MEMBER_CARD_TYPE' And (NAME = 'J2 Benefit Card' Or NAME = 'J8 Benefit Card' Or NAME = 'J Benefit Card' or NAME = 'JJ Card' )
+	</select>
+	
+	<select id="listCertificateTypes" resultMap="basedataResult">
+		Select ROW_ID,PAR_ROW_ID,NAME,TYPE,VAL From S_LST_OF_VAL 
+			Where TYPE = 'JJBE_PER_ID_TYPE' And ACTIVE_FLG = 'Y' Order By ORDER_BY
+	</select>
+	
+	<select id="listRemindQuestionTypes" resultMap="basedataResult">
+		Select ROW_ID,PAR_ROW_ID,NAME,TYPE,VAL From S_LST_OF_VAL 
+			Where TYPE = 'JJBE_SAFETY_PROBLEM' And ACTIVE_FLG = 'Y' Order By ORDER_BY
+	</select>
+	
+	<select id="listAddressTypes" resultMap="basedataResult">
+		Select ROW_ID,PAR_ROW_ID,NAME,TYPE,VAL From S_LST_OF_VAL 
+			Where TYPE = 'ADDRESS_TYPE' And ACTIVE_FLG = 'Y' Order By ORDER_BY
+	</select>
+	
+	<select id="listHierarchyTypes" resultMap="basedataResult">
+		Select ROW_ID,PAR_ROW_ID,NAME,TYPE,VAL From S_LST_OF_VAL 
+			Where type ='JJBE_TIER_PRIORITY' And  ACTIVE_FLG = 'Y' Order By ORDER_BY
+	</select>
+	
+	<select id="listInvoiceTypes" parameterType="string" resultMap="basedataResult">
+		Select ROW_ID,PAR_ROW_ID,NAME,TYPE,VAL From S_LST_OF_VAL 
+			Where TYPE = 'INVOICE_ITEM_TYPE' And ACTIVE_FLG = 'Y' 
+	</select>
+	
+	
+	<select id="listTitleTypes" resultMap="basedataResult">
+		Select ROW_ID,PAR_ROW_ID,NAME,TYPE,VAL From S_LST_OF_VAL 
+			Where TYPE = 'MR_MS' And ACTIVE_FLG = 'Y' Order By ORDER_BY
+	</select>
+	
+	<select id="listEduTypes" resultMap="basedataResult">
+		Select ROW_ID,PAR_ROW_ID,NAME,TYPE,VAL From S_LST_OF_VAL 
+			Where TYPE = 'FINS_CLM_IN_ACC_EDU_MLOV' And ACTIVE_FLG = 'Y' Order By ORDER_BY
+	</select>
+	
+	<select id="listProvinceTypes" resultMap="basedataResult">
+		Select ROW_ID,PAR_ROW_ID,NAME,TYPE,VAL From S_LST_OF_VAL 
+			Where TYPE = 'STATE_ABBREV' And ACTIVE_FLG = 'Y' Order By ORDER_BY
+	</select>
+	<select id="listCityTypes" parameterType="string" resultMap="basedataResult">
+		Select ROW_ID,PAR_ROW_ID,NAME,TYPE,VAL From S_LST_OF_VAL 
+			Where TYPE = 'LOY_CITY_CD' And ACTIVE_FLG = 'Y'  And PAR_ROW_ID IN (SELECT B.ROW_ID from S_LST_OF_VAL B WHERE B.TYPE='STATE_ABBREV' AND B.NAME = #{name} ) Order By ORDER_BY
+	</select>
+	<select id="listTownTypes" parameterType="string" resultMap="basedataResult">
+		Select ROW_ID,PAR_ROW_ID,NAME,TYPE,VAL From S_LST_OF_VAL 
+			Where TYPE = 'LOY_COUNTY_CD' And ACTIVE_FLG = 'Y' And PAR_ROW_ID IN (SELECT B.ROW_ID from S_LST_OF_VAL B WHERE B.TYPE='LOY_CITY_CD' AND B.NAME = #{name} ) Order By ORDER_BY
+	</select>
+	
+	<select id="getBaseDataById" parameterType="basedata" resultMap="basedataResult">
+		Select VAL From S_LST_OF_VAL 
+			Where  TYPE = #{type}  And ACTIVE_FLG = 'Y' And NAME = #{name} Order By ORDER_BY 
+	</select>
+	
+	<select id="getPrice"  parameterType="string"   resultMap="basedataResult">
+		Select ROW_ID,PAR_ROW_ID,NAME,TYPE,VAL From S_LST_OF_VAL Where TYPE = 'PRICE_LEVEL' And NAME = #{memberType}
+	</select>
+	
+	<select id="getCardLevel" parameterType="string" resultType="string">
+		Select VAL From S_LST_OF_VAL 
+			Where  TYPE = 'JJBE_TIER_PRIORITY'  And ACTIVE_FLG = 'Y' And NAME =  #{name}
+	</select>
+	
+	
+	
+	
+</mapper>

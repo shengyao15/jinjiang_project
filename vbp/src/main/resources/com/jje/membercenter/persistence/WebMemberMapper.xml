@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jje.membercenter.persistence.WebMemberMapper">
+    <resultMap type="memberVerfy" id="memberVerfyResult">
+        <id property="memInfoId" column="MEM_INFO_ID"/>
+        <id property="menName" column="MEN_NAME"/>
+        <id property="password" column="PASSWORD"/>
+        <id property="memberCode" column="MEM_NUM"/>      
+    </resultMap>
+
+	<resultMap type="webMember" id="webMemberResult">
+        <id property="id" column="ID"/>
+        <id property="email" column="EMAIL"/>
+        <id property="phone" column="PHONE"/>
+        <id property="tempCardNo" column="TEMP_CARD_NO"/>
+        <id property="memberCode" column="MEM_NUM"/>
+        <id property="question" column="QUESTION"/>
+        <id property="answer" column="ANSWER"/>
+        <id property="memType" column="MEM_TYPE"/>
+        <id property="mcMemberCode" column="MC_MEMBER_CODE" />
+        <id property="pwd" column="pwd" />
+        <id property="transformType" column="TRANSFORM_TYPE"/>
+        <id property="registChannel" column="REGIST_CHANNEL" />
+        <id property="registTag" column="REGIST_TAG" />
+        <!--<id property="registTag" column="REGIST_TAG"/>-->
+    </resultMap>
+
+
+	<resultMap id="appProMemberResult" type="appMember">
+		<id property="id" column="ID" />
+		<id property="phone" column="PHONE" />
+		<id property="email" column="EMAIL" />
+		<id property="cardNo" column="TEMP_CARD_NO" />
+		<id property="memberCode" column="MEM_NUM" />		
+		<id property="mcMemberCode" column="MC_MEMBER_CODE" />	
+		<id property="memType" column="MEM_TYPE"/>
+	</resultMap>
+
+
+	<select id="getProMemberByMcMemberCode"  resultMap="appProMemberResult">
+		SELECT ID,EMAIL,PHONE,TEMP_CARD_NO,MEM_NUM,MC_MEMBER_CODE,MEM_TYPE	
+		FROM WEBMEMBER_INFO
+		WHERE MC_MEMBER_CODE=#{mcMemberCode}
+	</select>
+	
+	
+	
+	<update id="updateWebMemberInfo" >
+		UPDATE	WEBMEMBER_INFO  SET    MEM_NUM=#{memberCode}, LAST_UPDATE_TIME = SYSDATE ,MEM_TYPE=#{memType}
+		WHERE ID=#{id}		
+    </update> 
+    
+    <update id="updatePwd" parameterType="memberVerfy">
+		UPDATE 
+		WEBMEMBER_VERIFY 
+		SET 
+       <if test="password != null and password != ''">
+			PASSWORD = #{password} 
+        </if>
+		WHERE 
+		MEM_INFO_ID = #{memInfoId}
+    </update>
+    
+	<select id="getLastInsertedCardNo"  resultType="string">
+        SELECT MAX(TEMP_CARD_NO)  FROM WEBMEMBER_INFO 
+    </select>
+    
+    
+    <select id="queryMemberInfo" parameterType="memberVerfy" resultType="webMember">
+        <include refid="selectWebMemberAndVerifySql"/>
+        <if test="menName!= null and menName != ''">
+			AND LOWER(M.MEN_NAME) = LOWER(#{menName})           
+        </if>
+        <if test="password!= null and password != ''">
+            AND M.PASSWORD = #{password}
+        </if>
+    </select>
+    
+    <select id="getWebMember" parameterType="long" resultMap="webMemberResult">
+        SELECT * FROM WEBMEMBER_INFO
+        WHERE ID = #{id}
+    </select>
+
+
+
+    <select id="queryRegisterByCellphoneOrEmail" resultMap="memberVerfyResult">
+		SELECT * FROM WEBMEMBER_VERIFY M
+		WHERE  LOWER(M.MEN_NAME) =  LOWER(#{name, jdbcType=VARCHAR})
+	</select>
+
+
+
+    <insert id="insertMemberVerfy">
+        <selectKey keyProperty="id" resultType="long" order="BEFORE">
+            SELECT S_WEBMEMBER_VERIFY.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO
+        WEBMEMBER_VERIFY
+        (
+        ID,
+        MEM_INFO_ID,
+        MEN_NAME,
+        PASSWORD
+       
+        )
+        VALUES
+        (
+        #{id},
+        #{memInfoId,jdbcType=DECIMAL},
+        #{menName,jdbcType=VARCHAR},
+        #{password,jdbcType=VARCHAR}      
+        )
+    </insert>
+
+
+    <insert id="insertMemberInfo" parameterType="webMember">
+        <selectKey keyProperty="id" resultType="long" order="BEFORE">
+            SELECT S_WEBMEMBER_INFO.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO
+        WEBMEMBER_INFO
+        (
+        ID,
+        EMAIL,
+        PHONE,
+        TEMP_CARD_NO,
+        MEM_NUM,
+        LAST_UPDATE_TIME,
+        LAST_LOGIN_TIME,
+        REFERRER_CARD_NO,
+        IS_MOBILE_BIND,
+        IS_EMAIL_BIND,
+        REGIST_CHANNEL,
+        REGIST_TIME ,
+        ACTIVITY_CODE,
+        MC_MEMBER_CODE,
+        MEM_TYPE,
+        IP_ADDRESS,
+        REGIST_TAG
+        )
+        VALUES
+        (
+        #{id},
+        #{email,jdbcType=VARCHAR},
+        #{phone,jdbcType=VARCHAR},
+        #{tempCardNo,jdbcType=VARCHAR},
+        #{memberCode,jdbcType=VARCHAR},
+        SYSDATE,
+        #{lastLoginTime,jdbcType=DATE},
+        #{referrerCardNo,jdbcType=VARCHAR},
+        #{isMobileBind,jdbcType=INTEGER},
+        #{isEmailBind,jdbcType=INTEGER},
+        #{registChannel,jdbcType=VARCHAR},
+        SYSDATE,
+        #{activityCode,jdbcType=VARCHAR},
+        #{mcMemberCode,jdbcType=VARCHAR},
+        #{memType,jdbcType=VARCHAR},
+        #{ipAddress,jdbcType=VARCHAR},
+        #{registTag,jdbcType=VARCHAR}
+        )
+    </insert>
+
+
+
+
+
+ <!--    <select id="queryComplexMemberInfo" resultType="com.jje.dto.membercenter.ComplexMemberInfoDto">
+	  select w.temp_card_no tempCardNo, m.card_no cardNo
+		  from WEBMEMBER_INFO w
+		  left join MEMBER_MEM_INFO m
+		    on (m.mem_num = w.mem_num)
+		 where m.card_no = #{cardNo}
+		    or w.temp_card_no = #{cardNo}
+		UNION
+		select w.temp_card_no tempCardNo, m.card_no cardNo
+		  from WEBMEMBER_INFO w
+		 right join MEMBER_MEM_INFO m
+		    on (m.mem_num = w.mem_num)
+		 where m.card_no = #{cardNo}
+		    or w.temp_card_no = #{cardNo}
+    </select> -->
+    
+    
+    <update id="updateWebMemberQuestion" >
+		UPDATE WEBMEMBER_INFO SET QUESTION=#{question},ANSWER = #{answer}, LAST_UPDATE_TIME = SYSDATE WHERE ID=#{id}		
+    </update> 
+
+    <sql id="selectWebMemberAndVerifySql">
+        SELECT distinct
+			   I.ID               id,
+			   I.MC_MEMBER_CODE   mcMemberCode,
+			   M.PASSWORD		  pwd,
+			   I.TEMP_CARD_NO     tempCardNo,
+		       I.MEM_NUM          memberCode,
+		       I.EMAIL            email,
+		       I.PHONE            phone,
+		       I.LAST_UPDATE_TIME lastUpdateTime,
+		       I.LAST_LOGIN_TIME  lastLoginTime,
+		       I.REFERRER_CARD_NO referrerCardNo,
+		       I.IS_MOBILE_BIND   isMobileBind,
+		       I.IS_EMAIL_BIND    isEmailBind,
+		       I.REGIST_CHANNEL   registChannel,
+		       I.REGIST_TIME      registTime,
+		       I.ACTIVITY_CODE    activityCode,
+		       I.MEM_TYPE         memType
+		  FROM WEBMEMBER_VERIFY M, WEBMEMBER_INFO I
+		 WHERE M.MEM_INFO_ID = I.ID
+		   AND I.MEM_TYPE !='NORMAL'
+    </sql>
+
+    <select id="getMemberByMcMemberCode" parameterType="string" resultType="webMember">
+        <include refid="selectWebMemberAndVerifySql"/>
+        AND I.MC_MEMBER_CODE = #{code}
+    </select>
+    
+    
+    <select id="getWebMemberByPhoneAndEmail" resultMap="webMemberResult">
+     SELECT  distinct v.PASSWORD AS pwd, i.* FROM  WEBMEMBER_INFO i, WEBMEMBER_VERIFY v
+     <where>      
+        <if test="email!= null and email!= ''">
+            LOWER(i.EMAIL) = LOWER(#{email})
+        </if>     
+        <if test="phone!= null and phone != ''">
+            AND i.PHONE = #{phone}
+        </if>
+        AND i.ID = v.MEM_INFO_ID 
+  	</where>
+    </select>
+    
+    <select id="getNonNormalWebMemberByPhoneAndEmail" resultMap="webMemberResult">
+     SELECT  distinct v.PASSWORD AS pwd, i.* FROM  WEBMEMBER_INFO i, WEBMEMBER_VERIFY v WHERE i.MEM_TYPE !='NORMAL'       
+        <if test="email!= null and email!= ''">
+            AND LOWER(i.EMAIL) = LOWER(#{email})
+        </if>     
+      <if test="phone!= null and phone != ''">
+            AND i.PHONE = #{phone}
+      </if>
+      AND i.ID = v.MEM_INFO_ID           
+    </select>
+    
+    
+
+    <select id="getWebMemberByCardNo" resultMap="webMemberResult">
+        SELECT * FROM  WEBMEMBER_INFO  WHERE MEM_TYPE ='QUICK_REGIST'
+        AND TEMP_CARD_NO = #{cardNo}
+    </select>
+    
+   	<delete id="deleteWebMemberVerify" >
+		DELETE FROM WEBMEMBER_VERIFY WHERE MEM_INFO_ID = #{id}
+    </delete>
+    
+    <update id="updateTransformType" >
+		UPDATE	WEBMEMBER_INFO SET TRANSFORM_TYPE=#{transformType}, LAST_UPDATE_TIME = SYSDATE WHERE MC_MEMBER_CODE=#{mc}		
+    </update>
+    <select id="queryMember"  resultMap="webMemberResult">
+    	SELECT * FROM  WEBMEMBER_INFO m
+    	<where>
+	        <if test="phone != null and  phone != '' ">
+				AND m.PHONE = #{phone}
+			</if>
+			<if test="email != null and  email != '' ">
+				AND m.EMAIL = #{email}
+			</if>
+			AND m.MEM_TYPE = 'QUICK_REGIST'
+	    </where>
+    </select>
+
+    <select id="getWebMemberIdList" resultType="Long">
+     <include refid="ORACLE.paginationStart"/>
+       select i.id from webmember_info i 
+	 <include refid="ORACLE.paginationEnd"/>
+    </select>
+    
+    <select id="getWebMemberCount" resultType="Integer">
+       select count(i.id ) from webmember_info i 
+    </select>
+
+    <select id="getWebMemberInfoById" parameterType="Long" resultType="webMember">
+        <include refid="selectWebMemberAndVerifySql"/>
+        and i.id = #{id}
+    </select>
+
+
+</mapper>

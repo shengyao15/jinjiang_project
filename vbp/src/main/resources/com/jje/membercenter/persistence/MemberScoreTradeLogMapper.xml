@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jje.membercenter.persistence.MemberScoreTradeLogMapper">
+
+    <resultMap type="memberScoreTrade" id="memberScoreTradeLogResult">
+        <id column="ID" property="id"/>
+        <result column="ORDER_NO" property="orderNo"/>
+        <result column="TRD_ORDER_NO" property="trdOrderNo"/>
+        <result column="CREATE_TIME" property="createTime"/>
+        <result column="MC_MEMBER_CODE" property="mcMemberCode"/>
+        <result column="PRODUCT_ID" property="productId"/>
+        <result column="TRADE_SCORE" property="tradeScore"/>
+        <result column="STATUS" property="status"/>
+        <result column="PRODUCT_NAME" property="productName"/>
+        <result column="EXCHANGE_TYPE" property="exchangeType"/>
+        <result column="TRANS_ID" property="transId"/>
+        <result column="REMAIN_POINT" property="remainPoint"/>
+        <result column="LAST_UPDATE_TIME" property="lastUpdateTime"/>
+        <result column="REMARK" property="remark"/>
+    </resultMap>
+    
+    
+    <insert id="addMemberScoreTradeLog" >
+		<selectKey keyProperty="id" resultType="long" order="BEFORE">
+		      SELECT S_T_VBP_SCORE_TRADE_LOG.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO
+		  T_VBP_SCORE_TRADE_LOG
+		  (
+		    ID,
+		    ORDER_NO,
+		    TRD_ORDER_NO,
+		    CREATE_TIME,
+		    MC_MEMBER_CODE,
+		    PRODUCT_ID,
+		    TRADE_SCORE,
+		    STATUS,
+		    PRODUCT_NAME,
+		    EXCHANGE_TYPE,
+		    TRANS_ID,
+		    REMAIN_POINT,
+		    LAST_UPDATE_TIME,
+		    REMARK
+		  )
+		values
+		  (
+		    #{id},
+		    #{orderNo,jdbcType=VARCHAR},
+		    #{trdOrderNo,jdbcType=VARCHAR},
+		    #{createTime,jdbcType=VARCHAR},
+		    #{mcMemberCode,jdbcType=VARCHAR},
+		    #{productId,jdbcType=VARCHAR},
+		    #{tradeScore,jdbcType=VARCHAR},
+		    #{status,jdbcType=VARCHAR},
+		    #{productName,jdbcType=VARCHAR},
+		    #{exchangeType,jdbcType=VARCHAR},
+		    #{transId,jdbcType=VARCHAR},
+		    #{remainPoint,jdbcType=VARCHAR},
+		    #{lastUpdateTime,jdbcType=DATE},
+		    #{remark,jdbcType=VARCHAR}
+		  )
+    </insert>
+    
+    
+    <update id="updateMemberScoreTradeLog" >
+       update
+       T_VBP_SCORE_TRADE_LOG t
+		<set>
+       		<if test="orderNo != null and orderNo != ''">
+				t.ORDER_NO = #{orderNo},
+	        </if>
+			<if test="trdOrderNo != null and trdOrderNo != ''">
+				t.TRD_ORDER_NO = #{trdOrderNo},
+	        </if>
+	         <if test="createTime != null and createTime != ''">
+				t.CREATE_TIME = #{createTime},
+	        </if>
+	        <if test="mcMemberCode != null and mcMemberCode != ''">
+				t.MC_MEMBER_CODE = #{mcMemberCode},
+	        </if>
+	        <if test="productId != null and productId != ''">
+				t.PRODUCT_ID = #{productId},
+	        </if>
+	        <if test="tradeScore != null and tradeScore != ''">
+				t.TRADE_SCORE = #{tradeScore},
+	        </if>
+	        <if test="status != null and status != ''">
+				t.STATUS = #{status},
+	        </if>
+	        <if test="productName != null and productName != ''">
+				t.PRODUCT_NAME = #{productName},
+	        </if>
+	        <if test="exchangeType != null and exchangeType != ''">
+				t.EXCHANGE_TYPE = #{exchangeType},
+	        </if>
+	        <if test="transId != null and transId != ''">
+				t.TRANS_ID = #{transId},
+	        </if>
+	          <if test="remainPoint != null and remainPoint != ''">
+				t.REMAIN_POINT = #{remainPoint},
+	        </if>
+	          <if test="lastUpdateTime != null and lastUpdateTime != ''">
+				t.LAST_UPDATE_TIME = #{lastUpdateTime},
+	        </if>
+	        <if test="remark != null and remark != ''">
+				 t.REMARK = #{remark},
+	        </if>
+		</set>
+		WHERE t.id=#{id} 
+    </update>
+    
+</mapper>

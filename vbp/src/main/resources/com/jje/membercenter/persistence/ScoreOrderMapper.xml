@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jje.membercenter.persistence.ScoreOrderMapper">
+
+	<resultMap id="scoreOrder" type="scoreOrder">
+		<id property="id" column="id" />
+		<result property="orderNo" column="ORDER_NO" />
+		<result property="createTime" column="CREATE_TIME" />
+		<result property="memberId" column="MEMBER_ID" />
+		<result property="buyScore" column="BUY_SCORE" />
+		<result property="orderStatus" column="ORDER_STATUS" />
+		<result property="payAmout" column="PAY_AMOUT" />
+		<result property="payTime" column="PAY_TIME" />
+		<result property="paymentNo" column="PAYMENT_NO" />
+		<result property="payType" column="PAY_TYPE" />
+		<result property="paymentVender" column="PAYMENT_VENDER" />
+		<result property="bankCode" column="BANK_CODE" />
+		<result property="payStatus" column="PAY_STATUS" />
+	</resultMap>
+	<insert id="insert" >
+		<selectKey keyProperty="id" resultType="long" order="BEFORE">
+			SELECT S_VBP_SCORE_ORDER.NEXTVAL FROM DUAL
+     </selectKey>
+		INSERT INTO T_VBP_SCORE_ORDER
+		(
+		ID,
+		ORDER_NO ,
+		CREATE_TIME,
+		MEMBER_ID,
+		BUY_SCORE ,
+		ORDER_STATUS,
+		PAY_AMOUT,
+		PAY_TIME,
+		PAYMENT_NO,
+		PAY_TYPE,
+		PAYMENT_VENDER,
+		BANK_CODE,
+		PAY_STATUS
+		)
+		VALUES
+		( 	#{id},
+			#{orderNo,jdbcType=VARCHAR},
+			SYSDATE,
+			#{memberId,jdbcType=VARCHAR},
+			#{buyScore,jdbcType=VARCHAR},
+			#{orderStatus,jdbcType=VARCHAR},
+			#{payAmout,jdbcType=DECIMAL},
+			#{payTime,jdbcType=TIMESTAMP},
+			#{paymentNo,jdbcType=VARCHAR},
+			#{payType,jdbcType=VARCHAR},
+			#{paymentVender,jdbcType=VARCHAR},
+			#{bankCode,jdbcType=VARCHAR},
+			#{payStatus,jdbcType=VARCHAR}
+		)
+	</insert>
+
+	<select id="get" resultMap="scoreOrder">
+		SELECT ID,ORDER_NO ,CREATE_TIME,MEMBER_ID,
+		BUY_SCORE ,ORDER_STATUS,PAY_AMOUT,
+		PAY_TIME,PAYMENT_NO,PAY_TYPE,
+		PAYMENT_VENDER,BANK_CODE,PAY_STATUS
+		FROM T_VBP_SCORE_ORDER
+		<where>
+			1=1
+			<if test="orderNo != null and orderNo != ''">
+				AND ORDER_NO =#{orderNo}
+     		</if>
+			<if test="memberId != null and memberId != ''">
+				AND MEMBER_ID =	#{memberId}
+	     	</if>			
+		</where>
+	</select>
+
+
+
+</mapper>

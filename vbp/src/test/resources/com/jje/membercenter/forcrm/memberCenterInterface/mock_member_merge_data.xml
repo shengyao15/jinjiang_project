@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mergeMembersDto>
+    <members>
+        <activateCode>Activiated</activateCode>
+        <cardNo>4175689454</cardNo>
+        <cellPhone>13524101988</cellPhone>
+        <email>evan1-1@jinjiang.com</email>
+        <id>0</id>
+        <isWebMember>false</isWebMember>
+        <memberCode>3-B57184046</memberCode>
+        <memberID>2-Y1NHQ</memberID>
+        <status>Merged</status>
+    </members>
+    <members>
+        <activateCode>Activiated</activateCode>
+        <cardList>
+            <cardTypeCd>J Benefit Card</cardTypeCd>
+            <id>0</id>
+            <memInfoId>0</memInfoId>
+            <status>To Make</status>
+            <xCardNum>H4567864161</xCardNum>
+        </cardList>
+        <cardList>
+            <cardTypeCd>J Benefit Card</cardTypeCd>
+            <id>0</id>
+            <memInfoId>0</memInfoId>
+            <status>To Make</status>
+            <xCardNum>H4175689454</xCardNum>
+        </cardList>
+        <cardNo>8766664567</cardNo>
+        <cellPhone>13524101988</cellPhone>
+        <email>evan1-2.du@jinjiang.com</email>
+        <id>0</id>
+        <isWebMember>false</isWebMember>
+        <memberCode>3-A57184046</memberCode>
+        <memberID>3-Y1NHQ</memberID>
+        <status>Active</status>
+    </members>
+</mergeMembersDto>

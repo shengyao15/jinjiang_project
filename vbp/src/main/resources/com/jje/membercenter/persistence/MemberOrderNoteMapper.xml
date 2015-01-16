@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jje.membercenter.persistence.MemberOrderNoteMapper">
+
+    <resultMap type="memberOrderNote" id="memberOrderNoteResult">
+        <id column="id" property="id"/>
+        <result column="order_no" property="orderNo"/>
+        <result column="content" property="content"/>
+        <result column="operation" property="operation"/>
+        <result column="user_id" property="userId"/>
+        <result column="user_name" property="userName"/>
+        <result column="reason" property="reason"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+    
+    <select id="getMemberOrderNoteByOrderNo" resultMap="memberOrderNoteResult" parameterType="String">
+       SELECT * FROM T_MEMBER_ORDER_NOTE WHERE ORDER_NO = #{orderNo}
+    </select>
+    
+    <insert id="saveMemberOrderNote" parameterType="memberOrderNote">
+       <selectKey keyProperty="id" resultType="long" order="BEFORE">
+           SELECT S_T_MEMBER_ORDER_NOTE.NEXTVAL FROM DUAL
+       </selectKey>
+      INSERT INTO
+      T_MEMBER_ORDER_NOTE
+      (
+        ID,           
+		ORDER_NO,     
+		CONTENT,
+		OPERATION,
+		USER_ID,
+		USER_NAME,
+		REASON,
+		CREATE_TIME    
+      )
+    values
+      (
+		#{id,jdbcType=NUMERIC},
+		#{orderNo,jdbcType=VARCHAR},
+		#{content,jdbcType=VARCHAR},
+		#{operation,jdbcType=VARCHAR},
+		#{userId,jdbcType=VARCHAR},
+		#{userName,jdbcType=VARCHAR},
+		#{reason,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP}
+      )
+    </insert>
+</mapper>

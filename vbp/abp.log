@@ -1,0 +1,38 @@
+2014-11-25 09:51:54,213 INFO [org.springframework.web.context.ContextLoader] - Root WebApplicationContext: initialization started
+2014-11-25 09:51:54,246 INFO [org.springframework.web.context.support.XmlWebApplicationContext] - Refreshing Root WebApplicationContext: startup date [Tue Nov 25 09:51:54 CST 2014]; root of context hierarchy
+2014-11-25 09:51:54,304 INFO [org.springframework.beans.factory.xml.XmlBeanDefinitionReader] - Loading XML bean definitions from class path resource [applicationContext.xml]
+2014-11-25 09:51:54,307 ERROR [org.springframework.web.context.ContextLoader] - Context initialization failed
+org.springframework.beans.factory.BeanDefinitionStoreException: IOException parsing XML document from class path resource [applicationContext.xml]; nested exception is java.io.FileNotFoundException: class path resource [applicationContext.xml] cannot be opened because it does not exist
+	at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:341)
+	at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:302)
+	at org.springframework.beans.factory.support.AbstractBeanDefinitionReader.loadBeanDefinitions(AbstractBeanDefinitionReader.java:143)
+	at org.springframework.beans.factory.support.AbstractBeanDefinitionReader.loadBeanDefinitions(AbstractBeanDefinitionReader.java:178)
+	at org.springframework.beans.factory.support.AbstractBeanDefinitionReader.loadBeanDefinitions(AbstractBeanDefinitionReader.java:149)
+	at org.springframework.web.context.support.XmlWebApplicationContext.loadBeanDefinitions(XmlWebApplicationContext.java:124)
+	at org.springframework.web.context.support.XmlWebApplicationContext.loadBeanDefinitions(XmlWebApplicationContext.java:93)
+	at org.springframework.context.support.AbstractRefreshableApplicationContext.refreshBeanFactory(AbstractRefreshableApplicationContext.java:130)
+	at org.springframework.context.support.AbstractApplicationContext.obtainFreshBeanFactory(AbstractApplicationContext.java:467)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:397)
+	at org.springframework.web.context.ContextLoader.createWebApplicationContext(ContextLoader.java:276)
+	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:197)
+	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:47)
+	at org.jboss.resteasy.plugins.spring.SpringContextLoaderListener.contextInitialized(SpringContextLoaderListener.java:44)
+	at org.eclipse.jetty.server.handler.ContextHandler.startContext(ContextHandler.java:746)
+	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:238)
+	at org.eclipse.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1240)
+	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:689)
+	at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:482)
+	at org.mortbay.jetty.plugin.JettyWebAppContext.doStart(JettyWebAppContext.java:256)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.mortbay.jetty.plugin.JettyRunMojo.restartWebApp(JettyRunMojo.java:435)
+	at org.mortbay.jetty.plugin.JettyRunMojo$1.filesChanged(JettyRunMojo.java:394)
+	at org.eclipse.jetty.util.Scanner.reportBulkChanges(Scanner.java:685)
+	at org.eclipse.jetty.util.Scanner.reportDifferences(Scanner.java:551)
+	at org.eclipse.jetty.util.Scanner.scan(Scanner.java:403)
+	at org.eclipse.jetty.util.Scanner$1.run(Scanner.java:353)
+	at java.util.TimerThread.mainLoop(Timer.java:512)
+	at java.util.TimerThread.run(Timer.java:462)
+Caused by: java.io.FileNotFoundException: class path resource [applicationContext.xml] cannot be opened because it does not exist
+	at org.springframework.core.io.ClassPathResource.getInputStream(ClassPathResource.java:158)
+	at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:328)
+	... 28 more

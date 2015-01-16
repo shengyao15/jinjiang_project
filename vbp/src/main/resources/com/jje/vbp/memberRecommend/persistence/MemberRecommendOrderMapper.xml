@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jje.vbp.memberRecommend.persistence.MemberRecommendOrderMapper">
+
+    <resultMap id="memberRecommendOrderResult" type="memberRecommendOrder">
+        <id property="id" column="ID"/>
+        <result property="recommenderId" column="recommend_Id"/>
+        <result property="memberId" column="member_Id"/>
+        <result property="scoreLevel" column="score_level"/>
+        <result property="memberName" column="member_name"/>
+        <result property="bookingDate" column="booking_date"/>
+    </resultMap>
+
+
+    
+    <select id="queryByMemberId" resultMap="memberRecommendOrderResult" parameterType="String">
+        SELECT
+         *
+        FROM
+          T_VBP_RECOMMEND_ORDER
+        WHERE
+          member_Id = #{memberId,jdbcType=VARCHAR}
+    </select>
+    
+    
+</mapper>

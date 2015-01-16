@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="request">
+	<xs:element name="request" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="head">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="transcode" type="xs:string"/>
+							<xs:element name="reqtime" type="xs:string"/>
+							<xs:element name="systype" type="xs:string"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="body">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="membid" type="xs:string"/>
+							<xs:element name="bindflg" type="xs:string"/>
+							<xs:element name="passwd" type="xs:string"/>
+							<xs:element name="pwdquestion" type="xs:string"/>
+							<xs:element name="pwdanswer" type="xs:string"/>
+							<xs:element name="listofcontact">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="contact" minOccurs="0" maxOccurs="unbounded">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="conpriflag" type="xs:string"/>
+													<xs:element name="sex" type="xs:string"/>
+													<xs:element name="race" type="xs:string"/>
+													<xs:element name="custtype" type="xs:string"/>
+													<xs:element name="lifecycle" type="xs:string"/>
+													<xs:element name="title" type="xs:string"/>
+													<xs:element name="nation" type="xs:string"/>
+													<xs:element name="hometown" type="xs:string"/>
+													<xs:element name="birthday" type="xs:string"/>
+													<xs:element name="cdtype" type="xs:string"/>
+													<xs:element name="cdno" type="xs:string"/>
+													<xs:element name="email" type="xs:string"/>
+													<xs:element name="cell" type="xs:string"/>
+													<xs:element name="edulevl" type="xs:string"/>
+													<xs:element name="unit" type="xs:string"/>
+													<xs:element name="position" type="xs:string"/>
+													<xs:element name="cmpname" type="xs:string"/>
+													<xs:element name="married" type="xs:string"/>
+													<xs:element name="language" type="xs:string"/>
+													<xs:element name="listofpersonaladdress">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="personaladdress" minOccurs="0" maxOccurs="unbounded">
+																	<xs:complexType>
+																		<xs:sequence>
+																			<xs:element name="addpriflag" type="xs:string"/>
+																			<xs:element name="addrtype" type="xs:string"/>
+																			<xs:element name="province" type="xs:string"/>
+																			<xs:element name="city" type="xs:string"/>
+																			<xs:element name="area" type="xs:string"/>
+																			<xs:element name="streetaddr" type="xs:string"/>
+																			<xs:element name="postcode" type="xs:string"/>
+																		</xs:sequence>
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+		<xs:element name="response" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="head">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="transcode" type="xs:string"/>
+							<xs:element name="resptime" type="xs:string"/>
+							<xs:element name="systype" type="xs:string"/>
+							<xs:element name="retcode" type="xs:string"/>
+							<xs:element name="retmsg" type="xs:string"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="body">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="membid" type="xs:string"/>
+							<xs:element name="recode" type="xs:string"/>
+							<xs:element name="remsg" type="xs:string"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

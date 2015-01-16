@@ -1,0 +1,1 @@
+insert into T_VBP_MEMBER_BIND_INFO  (id,member_id,mc_member_code,bind_type,bind_key,channel,status,create_time,update_time) values (14,'1-A1CJTS','30690','register_bind','bbbb','test','status_on',sysdate,sysdate);

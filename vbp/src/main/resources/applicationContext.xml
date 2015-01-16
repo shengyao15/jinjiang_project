@@ -1,0 +1,222 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+     http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
+     
+    <import resource="classpath:META-INF/cxf/cxf.xml" /> 
+    <import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" /> 
+    <import resource="classpath:META-INF/cxf/cxf-servlet.xml" /> 
+
+     
+
+	<import resource="datasource.xml" />
+    <import resource="bpcommonBeanContext.xml" />
+
+	<context:annotation-config />
+
+	<context:component-scan base-package="com.jje" />
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="order" value="1"/>
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        <property name="locations">
+            <list>
+            	<value>file:${JJE_CONFIG_HOME}/vbp.properties</value>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="GetMcMemberCodeByPhoneService" class="com.jje.membercenter.callcenter.GetMcMemberCodeByPhoneServiceImpl"/>
+    <jaxws:endpoint id="getMcMemberCodeByPhoneEndpoint" implementor="#GetMcMemberCodeByPhoneService" address="/getMcMemberCodeByPhone" /> 
+	
+	<!-- transaction manager, use JtaTransactionManager for global tx -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- define the SqlSessionFactory, notice that configLocation is not needed
+         when you use MapperFactoryBean -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+    </bean>
+    
+	<bean id="memberMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.jje.membercenter.persistence.MemberMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+    
+     <bean id="basedataMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.jje.membercenter.persistence.BaseDataMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+    
+	<bean id="memberScoreRedeemMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.jje.membercenter.persistence.MemberScoreRedeemMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+    
+    <bean id="memberCardOrderMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.jje.membercenter.persistence.MemberCardOrderMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+    
+    <bean id="memberCouponMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.jje.membercenter.persistence.MemberCouponMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+    
+    <bean id="memberFeedbackMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.jje.membercenter.persistence.MemberFeedbackMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+    
+    <bean id="memberSubFeedbackMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.jje.membercenter.persistence.MemberSubFeedbackMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+    
+     <bean id="memberXmlMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.jje.membercenter.persistence.MemberXmlMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+    
+      <bean id="memberOrderNoteMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.jje.membercenter.persistence.MemberOrderNoteMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+	
+	<bean id="noteMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.jje.membercenter.persistence.NoteMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+    
+    <bean id="scoreOrderMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.jje.membercenter.persistence.ScoreOrderMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+
+    <bean id="memberScoreLevelInfoMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.jje.membercenter.persistence.MemberScoreLevelInfoMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+    
+     <bean id="supportMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.jje.membercenter.persistence.SupportMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+    
+   <bean id="webMemberMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.jje.membercenter.persistence.WebMemberMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+    
+     <bean id="referrerInfoMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.jje.membercenter.persistence.ReferrerInfoMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+    
+    <bean id="lotteryCoinMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.jje.membercenter.campaign.persistence.LotteryCoinMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+
+    <bean id="commonlyUsedContactMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.jje.membercenter.commonContact.persistence.CommonlyUsedContactMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+    
+    <bean id="quickRegistMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.jje.vbp.regist.persistence.QuickRegistMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+    
+      <bean id="customerMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.jje.vbp.bigcustomer.persistence.CustomerMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+     </bean>
+    
+    <bean id="thirdpartyBindMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.jje.vbp.sns.persistence.ThirdpartyBindMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+     </bean>
+     
+    <bean id="memberContactsnsMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.jje.vbp.sns.persistence.MemberContactsnsMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+     </bean>
+     
+     <bean id="memberScoreTradeLogMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.jje.membercenter.persistence.MemberScoreTradeLogMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+     </bean>
+     
+     <bean id="memberScoreTradeOrderMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.jje.membercenter.persistence.MemberScoreTradeOrderMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+     </bean>
+
+    <bean id="memberPointsMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.jje.vbp.points.persistence.MemberPointsMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+
+    <bean id="systemDictMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.jje.vbp.config.persistence.SystemDictMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+    
+    <bean id="opRecordLogMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.jje.membercenter.persistence.OpRecordLogMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+    
+    <bean id="validateCodeLogMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.jje.vbp.validate.persistence.ValidateCodeLogMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+    
+    <bean id="validateCodeMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.jje.membercenter.persistence.ValidateCodeMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+    
+    <bean id="memberRecommendMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.jje.vbp.memberRecommend.persistence.MemberRecommendMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+    
+    <bean id="memberRecommendOrderMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.jje.vbp.memberRecommend.persistence.MemberRecommendOrderMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+    
+    <bean id="memberLevelBenefitMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.jje.vbp.levelBenefit.persistence.MemberLevelBenefitMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+    <bean id="taobaoBindingMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.jje.vbp.taobao.persistence.TaobaoBindingMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+    
+    <bean id="memberWechatMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.jje.vbp.memberWechat.persistence.MemberWechatMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+    
+    <bean id="memberBindMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.jje.vbp.memberBind.persistence.MemberBindMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+</beans>

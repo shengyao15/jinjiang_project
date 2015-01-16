@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="request" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xs:element name="request">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="head">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="transcode" type="xs:string" minOccurs="0" />
+              <xs:element name="reqtime" type="xs:string" minOccurs="0" />
+              <xs:element name="systype" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="body">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="membid" type="xs:string" minOccurs="0" />
+              <xs:element name="transdate" type="xs:string" minOccurs="0" />
+              <xs:element name="transtype" type="xs:string" minOccurs="0" />
+              <xs:element name="ordernumber" type="xs:string" minOccurs="0" />
+              <xs:element name="productname" type="xs:string" minOccurs="0" />
+              <xs:element name="redeemproduct" type="xs:string" minOccurs="0" />
+              <xs:element name="productnumber" type="xs:string" minOccurs="0" />
+              <xs:element name="points" type="xs:string" minOccurs="0" />
+              <xs:element name="transfercdno" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="response">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="head">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="transcode" type="xs:string" minOccurs="0" />
+              <xs:element name="resptime" type="xs:string" minOccurs="0" />
+              <xs:element name="systype" type="xs:string" minOccurs="0" />
+              <xs:element name="retcode" type="xs:string" minOccurs="0" />
+              <xs:element name="retmsg" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="body">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="membid" type="xs:string" minOccurs="0" />
+              <xs:element name="transid" type="xs:string" minOccurs="0" />
+              <xs:element name="remainpoint" type="xs:string" minOccurs="0" />
+              <xs:element name="recode" type="xs:string" minOccurs="0" />
+              <xs:element name="remsg" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

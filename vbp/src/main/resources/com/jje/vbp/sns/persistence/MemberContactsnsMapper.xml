@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jje.vbp.sns.persistence.MemberContactsnsMapper">
+
+	<resultMap id="memberContactsnsResult" type="memberContactsns">
+		<id property="id" column="ID" />
+		<id property="memberId" column="MEM_ID" />
+		<id property="useType" column="USETYPE" />
+		<id property="sns" column="SNS" />
+		<id property="status" column="STATUS" />
+		<id property="bindDate" column="BINDDATE" />
+		<id property="endDate" column="ENDDATE" />
+		<id property="bindChannel" column="BINDCHANNEL" />
+		<id property="comments" column="COMMENTS" />
+	</resultMap>
+	
+
+    <select id="query"  resultMap="memberContactsnsResult" parameterType="memberContactsns">
+		SELECT * FROM T_VBP_MEMBER_CONTACTSNS WHERE 1=1
+		<if test="memberId != null and  memberId != '' ">
+				AND MEM_ID = #{memberId}
+		</if>
+		<if test="useType != null and  useType != '' ">
+				AND USETYPE = #{useType}
+		</if>
+	</select>
+
+	  <update id="update" parameterType="memberContactsns" >
+	    update T_VBP_MEMBER_CONTACTSNS
+	    <set>
+	      <if test="sns != null" >
+	        sns = #{sns,jdbcType=VARCHAR},
+	      </if>
+	      <if test="status != null" >
+	        status = #{status,jdbcType=VARCHAR},
+	      </if>
+	      <if test="bindChannel != null" >
+	        bindChannel = #{bindChannel,jdbcType=VARCHAR},
+	      </if>
+	      <if test="comments != null" >
+	        comments = #{comments,jdbcType=VARCHAR},
+	      </if>
+	      <if test="bindDate != null" >
+	        bindDate = #{bindDate,jdbcType=DATE},
+	      </if>
+	      <if test="endDate != null" >
+	        endDate = #{endDate,jdbcType=DATE},
+	      </if>
+	    </set>
+	    where MEM_ID = #{memberId,jdbcType=VARCHAR} 
+	          and USETYPE = #{useType,jdbcType=VARCHAR} 
+	  </update>
+
+	<insert id="save" parameterType="memberContactsns">
+        <selectKey keyProperty="id" resultType="long" order="BEFORE">
+        SELECT S_VBP_MEMBER_CONTACTSNS.NEXTVAL FROM DUAL
+        </selectKey>
+		    INSERT INTO
+		      t_vbp_member_contactsns
+		      (
+		        	ID,
+					MEM_ID,
+					USETYPE,
+					SNS,
+					STATUS,
+					BINDDATE,
+					ENDDATE,
+					BINDCHANNEL,
+					COMMENTS
+		      )
+		    values
+		      (
+		        	#{id},
+					 #{memberId,jdbcType=VARCHAR},
+					 #{useType,jdbcType=VARCHAR},
+					 #{sns,jdbcType=VARCHAR},
+					 #{status,jdbcType=VARCHAR},
+					#{bindDate,jdbcType=DATE},
+					#{endDate,jdbcType=DATE},
+					 #{bindChannel,jdbcType=VARCHAR},
+					 #{comments,jdbcType=VARCHAR}
+		      )
+    </insert>
+</mapper>

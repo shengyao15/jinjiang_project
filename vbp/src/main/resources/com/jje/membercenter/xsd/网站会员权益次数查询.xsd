@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="request" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xs:element name="request" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="head">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="transcode" type="xs:string" minOccurs="0" />
+              <xs:element name="reqtime" type="xs:string" minOccurs="0" />
+              <xs:element name="systype" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="body">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="membid" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="response" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="head">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="transcode" type="xs:string" minOccurs="0" />
+              <xs:element name="reqtime" type="xs:string" minOccurs="0" />
+              <xs:element name="systype" type="xs:string" minOccurs="0" />
+              <xs:element name="retcode" type="xs:string" minOccurs="0" />
+              <xs:element name="retmsg" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="body">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="record" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="viptype" type="xs:string" minOccurs="0" />
+                    <xs:element name="viptimes" type="xs:string" minOccurs="0" />
+                    <xs:element name="vendor" type="xs:string" minOccurs="0" />
+                    <xs:element name="status" type="xs:string" minOccurs="0" />
+                    <xs:element name="expiredate" type="xs:string" minOccurs="0" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

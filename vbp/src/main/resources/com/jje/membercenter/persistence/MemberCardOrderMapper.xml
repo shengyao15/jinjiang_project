@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jje.membercenter.persistence.MemberCardOrderMapper">
+
+    <resultMap type="memberCardOrder" id="memberCardOrderResult">
+        <id column="id" property="id"/>
+        <result column="order_no" property="orderNo"/>
+        <result column="order_time" property="orderTime"/>
+        <result column="create_time" property="createTime"/>
+        <result column="card_no" property="cardNo"/>
+        <result column="order_type" property="orderType"/>
+        <result column="current_level" property="currentLevel"/>
+        <result column="next_level" property="nextLevel"/>
+        <result column="amount" property="amount"/>
+        <result column="pay_time" property="payTime"/>
+        <result column="payment_no" property="paymentNo"/>
+        <result column="pay_type" property="payType"/>
+        <result column="payment_vender" property="paymentVender"/>
+        <result column="bank_code" property="bankCode"/>
+        <result column="pay_status" property="payStatus"/>
+        <result column="status" property="status"/>
+        <result column="refund" property="REFUND"/>
+        <result column="MC_MEMBER_CODE" property="mcMemberCode"/>
+        <result column="sale_channel" property="saleChannel"/>
+        
+    </resultMap>
+    
+    <update id="updateStatus" parameterType="memberCardOrder">
+	    update T_MEMBER_CARD_ORDER set ORDER_NO = #{orderNo}
+	    <if test="status !=null and status !='' ">
+	        ,STATUS = #{status}
+	    </if>
+	    <if test="payStatus !=null and payStatus !='' ">
+	        ,PAY_STATUS = #{payStatus}
+	    </if>
+	    <if test="cardNo !=null and cardNo !='' ">
+	       ,CARD_NO=#{cardNo}
+	    </if>
+	    <if test="payTime !=null and payTime !='' ">
+	       ,PAY_TIME=#{payTime}
+	    </if>
+	    <if test="mcMemberCode !=null and mcMemberCode !='' ">
+	       	,MC_MEMBER_CODE=#{mcMemberCode}
+	    </if>
+		<if test="paymentNo !=null and paymentNo !='' ">
+	       ,PAYMENT_NO=#{paymentNo}
+	    </if> 
+	    <if test="paymentVender !=null and paymentVender !='' ">
+	       ,PAYMENT_VENDER=#{paymentVender}
+	    </if> 
+	    <if test="bankCode !=null and bankCode !='' ">
+	       ,BANK_CODE=#{bankCode}
+	    </if>
+	    <if test="refundAmount !=null and refundAmount !='' ">
+	       ,REFUND_AMOUNT=#{refundAmount}
+	    </if>   	  	    
+	     where ORDER_NO = #{orderNo}
+    </update>
+    
+   <select id="queryMemberCardOrder"  resultMap="memberCardOrderResult">
+        <include refid="ORACLE.paginationStart"/>
+        SELECT ID,ORDER_NO,ORDER_TIME,CREATE_TIME,CARD_NO,ORDER_TYPE,CURRENT_LEVEL,NEXT_LEVEL,AMOUNT,PAY_TIME,PAYMENT_NO,PAY_TYPE,PAYMENT_VENDER,BANK_CODE,PAY_STATUS,STATUS FROM T_MEMBER_CARD_ORDER WHERE 1=1
+        <if test="condition.payStatus !=null and condition.payStatus !='' ">
+            and PAY_STATUS = #{condition.payStatus}
+        </if>
+        <if test="condition.orderType !=null and condition.orderType !='' ">
+            and ORDER_TYPE =#{condition.orderType}
+        </if>
+        <if test="condition.orderType ==null and condition.orderType =='' ">
+            and (ORDER_TYPE ='UPGRADE' or ORDER_TYPE ='RECHARGE')
+        </if>
+        <if test="condition.mcMemberCode !=null and condition.mcMemberCode !='' ">
+            and MC_MEMBER_CODE =#{condition.mcMemberCode}
+        </if>
+        <if test="condition.startDate !=null and condition.startDate !='' and condition.endDate !=null and condition.endDate !=''">
+            <![CDATA[and ORDER_TIME>=#{condition.startDate} and ORDER_TIME<=#{condition.endDate}]]>
+        </if>
+          ORDER BY ORDER_TIME DESC
+        <include refid="ORACLE.paginationEnd"/>
+   </select>
+   
+   <select id="getMemberCardOrderCount" resultType="Integer">
+       SELECT COUNT(*) FROM T_MEMBER_CARD_ORDER WHERE 1=1
+        <if test="condition.payStatus !=null and condition.payStatus !='' ">
+            and PAY_STATUS = #{condition.payStatus}
+        </if>
+        <if test="condition.orderType !=null and condition.orderType !='' ">
+            and ORDER_TYPE =#{condition.orderType}
+        </if>
+        <if test="condition.orderType ==null and condition.orderType =='' ">
+            and (ORDER_TYPE ='UPGRADE' or ORDER_TYPE ='RECHARGE')
+        </if>
+        <if test="condition.mcMemberCode !=null and condition.mcMemberCode !='' ">
+            and MC_MEMBER_CODE =#{condition.mcMemberCode}
+        </if>
+        <if test="condition.startDate !=null and condition.startDate !='' and condition.endDate !=null and condition.endDate !='' ">
+            <![CDATA[and ORDER_TIME>=#{condition.startDate} and ORDER_TIME<= #{condition.endDate}]]>
+        </if>
+   </select>
+     
+   <select id="queryAdminMemberCardOrder"  resultMap="memberCardOrderResult">
+        <include refid="ORACLE.paginationStart"/>
+        SELECT ID,ORDER_NO,ORDER_TIME,CREATE_TIME,CARD_NO,ORDER_TYPE,CURRENT_LEVEL,NEXT_LEVEL,AMOUNT,PAY_TIME,PAYMENT_NO,PAY_TYPE,PAYMENT_VENDER,BANK_CODE,PAY_STATUS,STATUS,REFUND_AMOUNT,SALE_CHANNEL FROM T_MEMBER_CARD_ORDER WHERE 1=1
+        <if test="condition.orderNo !=null and condition.orderNo !='' ">
+            and ORDER_NO = #{condition.orderNo}
+        </if>
+        <if test="condition.payStatus !=null and condition.payStatus !='' ">
+            and PAY_STATUS = #{condition.payStatus}
+        </if>
+        <if test="condition.orderType !=null and condition.orderType !='' ">
+            and ORDER_TYPE =#{condition.orderType}
+        </if>
+        <if test="condition.cardNo !=null and condition.cardNo !='' ">
+            and CARD_NO =#{condition.cardNo}
+        </if>
+        <if test="condition.payType !=null and condition.payType !='' ">
+            and PAY_TYPE =#{condition.payType}
+        </if>
+        <if test="condition.paymentVender !=null and condition.paymentVender !='' ">
+            and PAYMENT_VENDER =#{condition.paymentVender}
+        </if>
+        <if test="condition.saleChannel !=null and condition.saleChannel !='' ">
+            and SALE_CHANNEL =#{condition.saleChannel}
+        </if>
+         <![CDATA[and ORDER_TIME>=#{condition.startDate} and ORDER_TIME<=#{condition.endDate}]]>
+          ORDER BY ORDER_TIME DESC
+        <include refid="ORACLE.paginationEnd"/>
+   </select>
+   
+   <select id="getAdminMemberCardOrderCount" resultType="Integer">
+       SELECT COUNT(*) FROM T_MEMBER_CARD_ORDER WHERE 1=1
+        <if test="condition.orderNo !=null and condition.orderNo !='' ">
+            and ORDER_NO = #{condition.orderNo}
+        </if>
+        <if test="condition.payStatus !=null and condition.payStatus !='' ">
+            and PAY_STATUS = #{condition.payStatus}
+        </if>
+        <if test="condition.orderType !=null and condition.orderType !='' ">
+            and ORDER_TYPE =#{condition.orderType}
+        </if>
+        <if test="condition.cardNo !=null and condition.cardNo !='' ">
+            and CARD_NO =#{condition.cardNo}
+        </if>
+        <if test="condition.payType !=null and condition.payType !='' ">
+            and PAY_TYPE =#{condition.payType}
+        </if>
+        <if test="condition.paymentVender !=null and condition.paymentVender !='' ">
+            and PAYMENT_VENDER =#{condition.paymentVender}
+        </if> 
+        <if test="condition.saleChannel !=null and condition.saleChannel !='' ">
+            and SALE_CHANNEL =#{condition.saleChannel}
+        </if>        
+         <![CDATA[and ORDER_TIME>=#{condition.startDate} and ORDER_TIME<=#{condition.endDate}]]>
+   </select>
+     
+     <select id="getNextSequence" resultType="long" >
+      	select S_T_MEMBER_CARD_ORDER.nextval from dual
+     </select>
+
+    
+    <insert id="insertOrder" parameterType="memberCardOrder">
+    INSERT INTO
+      T_MEMBER_CARD_ORDER
+      (
+        ID,           
+		ORDER_NO,     
+		ORDER_TIME,  
+		CREATE_TIME,  
+		CARD_NO,    
+		ORDER_TYPE, 
+		CURRENT_LEVEL,
+		NEXT_LEVEL,  
+		AMOUNT,  
+		PAY_TIME,     
+		PAYMENT_NO,  
+		PAY_TYPE,    
+		PAYMENT_VENDER,
+		BANK_CODE,    
+		PAY_STATUS,  
+		STATUS,
+		MC_MEMBER_CODE,
+		SALE_CHANNEL
+      )
+    values
+      (
+		#{id,jdbcType=NUMERIC},
+		#{orderNo,jdbcType=VARCHAR},
+		#{orderTime,jdbcType=TIMESTAMP},
+		#{createTime,jdbcType=TIMESTAMP},
+		#{cardNo,jdbcType=VARCHAR},
+		#{orderType,jdbcType=VARCHAR},
+		#{currentLevel,jdbcType=VARCHAR},
+		#{nextLevel,jdbcType=VARCHAR},
+		#{amount,jdbcType=NUMERIC},
+		#{payTime,jdbcType=DATE},
+		#{paymentNo,jdbcType=VARCHAR},
+		#{payType,jdbcType=VARCHAR},
+		#{paymentVender,jdbcType=VARCHAR},
+		#{bankCode,jdbcType=VARCHAR},
+		#{payStatus,jdbcType=NUMERIC},
+		#{status,jdbcType=NUMERIC},
+		#{mcMemberCode,jdbcType=VARCHAR},
+		#{saleChannel,jdbcType=VARCHAR}
+      )
+    </insert>
+    
+    <insert id="insertOrderHistory" parameterType="cardOrderHistory">
+    <selectKey keyProperty="logId" resultType="long" order="BEFORE">
+        select S_T_MEMBER_CARD_ORDER_HISTORY.nextval from dual
+    </selectKey>
+    INSERT INTO
+      T_MEMBER_CARD_ORDER_HISTORY
+      (
+        LOG_ID,           
+        ORDER_ID,           
+				ORDER_NO,     
+				ORDER_TIME,  
+				CREATE_TIME,  
+				CARD_NO,    
+				ORDER_TYPE, 
+				CURRENT_LEVEL,
+				NEXT_LEVEL,  
+				AMOUNT,  
+				PAY_TIME,     
+				PAYMENT_NO,  
+				PAY_TYPE,    
+				PAYMENT_VENDER,
+				BANK_CODE,    
+				PAY_STATUS,  
+				STATUS,
+				MC_MEMBER_CODE,
+				SALE_CHANNEL,
+				OPERATION_TYPE,
+				REMARK
+		   )
+		    values
+		   (
+				#{logId},
+				#{orderId,jdbcType=NUMERIC},
+				#{orderNo,jdbcType=VARCHAR},
+				#{orderTime,jdbcType=TIMESTAMP},
+				#{createTime,jdbcType=TIMESTAMP},
+				#{cardNo,jdbcType=VARCHAR},
+				#{orderType,jdbcType=VARCHAR},
+				#{currentLevel,jdbcType=VARCHAR},
+				#{nextLevel,jdbcType=VARCHAR},
+				#{amount,jdbcType=NUMERIC},
+				#{payTime,jdbcType=DATE},
+				#{paymentNo,jdbcType=VARCHAR},
+				#{payType,jdbcType=VARCHAR},
+				#{paymentVender,jdbcType=VARCHAR},
+				#{bankCode,jdbcType=VARCHAR},
+				#{payStatus,jdbcType=NUMERIC},
+				#{status,jdbcType=NUMERIC},
+				#{mcMemberCode,jdbcType=VARCHAR},
+				#{saleChannel,jdbcType=VARCHAR},
+				#{operationType,jdbcType=VARCHAR},
+				#{remark,jdbcType=VARCHAR}
+      )
+    </insert>
+    
+    <select id="getMemberCardOrder" parameterType="String" resultMap="memberCardOrderResult">
+      select * from T_MEMBER_CARD_ORDER where ORDER_NO = #{orderNo}
+    </select>
+
+</mapper>

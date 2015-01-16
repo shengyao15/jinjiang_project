@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xsd:element name="request">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="head">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="transcode" type="xsd:integer"/>
+							<xsd:element name="reqtime" type="xsd:integer"/>
+							<xsd:element name="systype" type="xsd:string"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="body">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="membid" type="xsd:string"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="response">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="head">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="transcode" type="xsd:string"/>
+							<xsd:element name="reqtime" type="xsd:string"/>
+							<xsd:element name="systype" type="xsd:string"/>
+							<xsd:element name="retcode" type="xsd:string"/>
+							<xsd:element name="retmsg" type="xsd:string"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="body">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="membid" type="xsd:string"/>
+							<xsd:element name="loypoint" type="xsd:integer"/>
+							<xsd:element name="cardstat" type="xsd:string"/>
+							<xsd:element name="listofcontact">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="contact">
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="conpriflag" type="xsd:string"/>
+													<xsd:element name="lastname" type="xsd:string"/>
+													<xsd:element name="sex" type="xsd:string"/>
+													<xsd:element name="race" type="xsd:string"/>
+													<xsd:element name="custtype" type="xsd:string"/>
+													<xsd:element name="lifecycle" type="xsd:string"/>
+													<xsd:element name="language" type="xsd:string"/>
+													<xsd:element name="listofpersonaladdress">
+														<xsd:complexType>
+															<xsd:sequence>
+																<xsd:element name="personaladdress" maxOccurs="unbounded">
+																	<xsd:complexType>
+																		<xsd:sequence>
+																			<xsd:element name="addpriflag" type="xsd:string"/>
+																			<xsd:element name="addrtype" type="xsd:string"/>
+																			<xsd:element name="address" type="xsd:string"/>
+																			<xsd:element name="province" type="xsd:string"/>
+																			<xsd:element name="city" type="xsd:string"/>
+																			<xsd:element name="area" type="xsd:string"/>
+																			<xsd:element name="streetaddr" type="xsd:string"/>
+																			<xsd:element name="postcode" type="xsd:integer"/>
+																		</xsd:sequence>
+																	</xsd:complexType>
+																</xsd:element>
+															</xsd:sequence>
+														</xsd:complexType>
+													</xsd:element>
+													<xsd:element name="title" type="xsd:string"/>
+													<xsd:element name="nation" type="xsd:string"/>
+													<xsd:element name="hometown" type="xsd:string"/>
+													<xsd:element name="birthday" type="xsd:date"/>
+													<xsd:element name="cdtype" type="xsd:string"/>
+													<xsd:element name="cdno" type="xsd:string"/>
+													<xsd:element name="email" type="xsd:string"/>
+													<xsd:element name="cell" type="xsd:string"/>
+													<xsd:element name="edulevl" type="xsd:string"/>
+													<xsd:element name="idustype" type="xsd:string"/>
+													<xsd:element name="unit" type="xsd:string"/>
+													<xsd:element name="position" type="xsd:string"/>
+													<xsd:element name="income" type="xsd:integer"/>
+													<xsd:element name="cmpname" type="xsd:string"/>
+													<xsd:element name="married" type="xsd:string"/>
+													<xsd:element name="preference" type="xsd:string"/>
+													<xsd:element name="hobby" type="xsd:string"/>
+													<xsd:element name="hobdesp" type="xsd:string"/>
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jje.membercenter.persistence.MemberFeedbackMapper">
+    <resultMap type="memberFeedback" id="memberFeedbackResultMap">
+      <result column="id" property="id"/>
+      <result column="operator" property="operator"/>
+      <result column="channel" property="channel"/>
+      <result column="sources" property="sources"/>
+      <result column="status" property="status"/>
+      <result column="mc_member_code" property="mcMemberCode"/>
+      <result column="feedback_type" property="feedbackType"/>
+      <result column="content" property="content"/>
+      <result column="solve_memo" property="solveMemo"/>
+      <result column="create_time" property="createTime"/>
+      <result column="update_time" property="updateTime"/>
+    </resultMap>
+    
+    <resultMap id="memberFeedbackQueryResultMap" extends="memberFeedbackResultMap" type="memberFeedback">
+      <result column="phone" property="phone"/>
+      <result column="name" property="name"/>
+    </resultMap>
+    
+    <sql id="queryFeedbackWhere">
+    	<if test="condition.id !=null and condition.id !='' ">
+            and id = #{condition.id}
+        </if>
+    	<if test="condition.channel !=null and condition.channel !='' ">
+            and channel = #{condition.channel}
+        </if>
+		 <if test="condition.mcMemberCode !=null and condition.mcMemberCode !='' ">
+            and mc_member_code = #{condition.mcMemberCode}
+        </if>
+		 <if test="condition.startCreateTime !=null and condition.startCreateTime !='' ">
+             <![CDATA[and create_time >= #{condition.startCreateTime}]]>
+        </if>
+		 <if test="condition.endCreateTime !=null and condition.endCreateTime !='' ">
+            <![CDATA[and create_time <= #{condition.endCreateTime}]]>
+        </if>
+		 <if test="condition.phone !=null and condition.phone !='' ">
+            and phone = #{condition.phone}
+        </if>
+		 <if test="condition.name !=null and condition.name !='' ">
+            and name = #{condition.name}
+        </if>
+		 <if test="condition.status !=null and condition.status !='' ">
+            and status = #{condition.status}
+        </if>
+		 <if test="condition.sources !=null and condition.sources !='' ">
+            and sources = #{condition.sources}
+        </if>
+		 <if test="condition.content !=null and condition.content !='' ">
+            and content like '%'||#{condition.content}||'%'
+        </if>
+    </sql>
+    
+	<select id="queryFeedback" resultMap="memberFeedbackQueryResultMap">
+	  <if test="pagination != null">
+	   <include refid="ORACLE.paginationStart"/>
+	  </if>
+		select * from (
+		  SELECT F.*,M.phone,M.name
+          FROM T_VBP_MEMBER_FEEDBACK F LEFT JOIN MEMBER_MEM_INFO M ON F.MC_MEMBER_CODE = M.MC_MEMBER_CODE
+         ) WHERE 1=1
+		 <include refid="queryFeedbackWhere"/>
+        order by create_time desc
+        <if test="pagination != null">
+           <include refid="ORACLE.paginationEnd"/>
+        </if>
+	</select>
+	
+	<select id="queryFeedbackCount" resultType="integer">
+	  select count(1) from (
+	     SELECT F.*,M.phone,M.name
+          FROM T_VBP_MEMBER_FEEDBACK F LEFT JOIN MEMBER_MEM_INFO M ON F.MC_MEMBER_CODE = M.MC_MEMBER_CODE
+	  ) WHERE 1=1 
+	  <include refid="queryFeedbackWhere"/>
+	</select>
+	
+	<update id="updateMemberFeedback" parameterType="memberFeedback">
+	  update T_VBP_MEMBER_FEEDBACK set update_time = SYSDATE
+	  <if test="status !=null and status !='' ">
+	     ,STATUS = #{status}
+	  </if>
+	  <if test="solveMemo !=null and solveMemo !='' ">
+	     ,solve_memo = #{solveMemo}
+	  </if>
+	  <if test="content !=null and content !='' ">
+	     ,content = #{content}
+	  </if>
+	  <if test="feedbackType !=null and feedbackType !='' ">
+	     ,feedback_type = #{feedbackType}
+	  </if>
+	  <if test="channel !=null and channel !='' ">
+	     ,channel = #{channel}
+	  </if>
+	  <if test="sources !=null and sources !='' ">
+	     ,sources = #{sources}
+	  </if>
+	  where id =#{id}
+	</update>
+	
+	<insert id="insertMemberFeedback" parameterType="memberFeedback">
+	<selectKey keyProperty="id" resultType="long" order="BEFORE">
+        select S_VBP_MEMBER_FEEDBACK.nextval from dual
+    </selectKey>
+	   insert into T_VBP_MEMBER_FEEDBACK ( id,operator,channel,sources,status,mc_member_code,feedback_type,content,solve_memo,create_time,update_time  )
+	   values(
+	    #{id,jdbcType=NUMERIC},
+		#{operator,jdbcType=VARCHAR},
+		#{channel,jdbcType=VARCHAR},
+		#{sources,jdbcType=VARCHAR},
+		#{status,jdbcType=VARCHAR},
+		#{mcMemberCode,jdbcType=VARCHAR},
+		#{feedbackType,jdbcType=VARCHAR},
+		#{content,jdbcType=VARCHAR},
+		#{solveMemo,jdbcType=VARCHAR},
+		SYSDATE,
+		SYSDATE
+		)
+	</insert>
+	
+</mapper>

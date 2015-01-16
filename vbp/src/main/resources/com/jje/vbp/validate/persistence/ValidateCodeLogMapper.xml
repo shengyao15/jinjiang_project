@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jje.vbp.validate.persistence.ValidateCodeLogMapper" >
+
+  <resultMap id="BaseResultMap" type="com.jje.vbp.validate.domain.ValidateCodeLog" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="IP" property="ip" jdbcType="VARCHAR" />
+    <result column="PHONE" property="phone" jdbcType="VARCHAR" />
+    <result column="MAIL" property="mail" jdbcType="VARCHAR" />
+    <result column="CODE" property="code" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="MEMBER_INFO_ID" property="memberInfoId" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    ID, IP, PHONE, MAIL, CODE, CREATE_DATE, MEMBER_INFO_ID
+  </sql>
+  
+  <sql id="Base_Where_Condition" >
+     <if test="ip != null" >
+       AND IP = #{ip,jdbcType=VARCHAR}
+     </if>
+     <if test="phone != null" >
+       AND PHONE = #{phone,jdbcType=VARCHAR}
+     </if>
+     <if test="mail != null" >
+       AND MAIL = #{mail,jdbcType=VARCHAR}
+     </if>
+     <if test="code != null" >
+       AND CODE = #{code,jdbcType=VARCHAR}
+     </if>
+     <if test="createDate != null" >
+     	<![CDATA[
+       AND CREATE_DATE >= #{createDate,jdbcType=TIMESTAMP}
+       ]]>
+     </if>
+     <if test="memberInfoId != null" >
+       AND MEMBER_INFO_ID = #{memberInfoId,jdbcType=VARCHAR}
+     </if>
+  </sql>	
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_VBP_VALIDATE_CODE_LOG
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  
+  <select id="getLastLog" resultMap="BaseResultMap" parameterType="com.jje.vbp.validate.domain.ValidateCodeLog" >
+  	select * from (
+    select 
+    <include refid="Base_Column_List" />
+    from T_VBP_VALIDATE_CODE_LOG
+    <where>
+    	<include refid="Base_Where_Condition" />
+    </where>
+    order by CREATE_DATE desc) where rownum=1
+  </select>
+  
+  <select id="selectLogForValidate" resultMap="BaseResultMap" parameterType="com.jje.vbp.validate.domain.ValidateCodeLog" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_VBP_VALIDATE_CODE_LOG
+    <where>
+    	<include refid="Base_Where_Condition" />
+    </where>
+    order by CREATE_DATE desc
+  </select>
+  
+  <select id="countLogForValidate" resultType="Integer" parameterType="com.jje.vbp.validate.domain.ValidateCodeLog" >
+    select 
+     count(*)
+    from T_VBP_VALIDATE_CODE_LOG
+    <where>
+    	<include refid="Base_Where_Condition" />
+    </where>
+  </select>
+  
+  <insert id="insert" parameterType="com.jje.vbp.validate.domain.ValidateCodeLog" >
+    <selectKey resultType="Long" keyProperty="id" order="BEFORE" >
+      select S_VBP_VALIDATE_CODE_LOG.nextval from dual
+    </selectKey>
+    insert into T_VBP_VALIDATE_CODE_LOG (ID, IP, PHONE, MAIL, 
+      CODE, CREATE_DATE,MEMBER_INFO_ID)
+    values (#{id,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{mail,jdbcType=VARCHAR}, 
+      #{code,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},#{memberInfoId,jdbcType=VARCHAR})
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.jje.vbp.validate.domain.ValidateCodeLog" >
+    <selectKey resultType="Long" keyProperty="id" order="BEFORE" >
+      select S_VBP_VALIDATE_CODE_LOG.nextval from dual
+    </selectKey>
+    insert into T_VBP_VALIDATE_CODE_LOG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="ip != null" >
+        IP,
+      </if>
+      <if test="phone != null" >
+        PHONE,
+      </if>
+      <if test="mail != null" >
+        MAIL,
+      </if>
+      <if test="code != null" >
+        CODE,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null" >
+        #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.jje.vbp.validate.domain.ValidateCodeLog" >
+    update T_VBP_VALIDATE_CODE_LOG
+    <set>
+      <if test="ip != null" >
+        IP = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null" >
+        MAIL = #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        CODE = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.jje.vbp.validate.domain.ValidateCodeLog" >
+    update T_VBP_VALIDATE_CODE_LOG
+    set IP = #{ip,jdbcType=VARCHAR},
+      PHONE = #{phone,jdbcType=VARCHAR},
+      MAIL = #{mail,jdbcType=VARCHAR},
+      CODE = #{code,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  
+</mapper>

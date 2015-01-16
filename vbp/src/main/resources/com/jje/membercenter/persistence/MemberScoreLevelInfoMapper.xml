@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jje.membercenter.persistence.MemberScoreLevelInfoMapper">
+
+	<resultMap id="memberScoreLevelInfoResult" type="memberScoreLevelInfo">
+		<id property="id" column="id" />
+		<result property="memberInfoId" column="MEMBER_INFO_ID" />
+		<result property="memberCode" column="MEM_NUM" />
+		<result property="availableScore" column="AVAILABLE_SCORE" />
+		<result property="rankScore" column="RANK_SCORE" />
+		<result property="rankTimeSize" column="RANK_TIME_SIZE" />
+		<result property="updatedDate" column="UPDATED_DATE" />
+		<result property="scoreLevel" column="SCORE_LEVEL" />
+		<result property="scoreMemberLevelIndate" column="SCORE_MEMEBER_LEVEl_INDATE" />
+		<result property="scoreType" column="SCORE_TYPE" />
+	</resultMap>
+
+
+	<select id="queryMemberScoreInfoByMemberId" resultMap="memberScoreLevelInfoResult">
+		SELECT t1.ID,
+		t1.MEMBER_INFO_ID,
+		t1.MEM_NUM,
+		t1.AVAILABLE_SCORE,
+		t1.RANK_SCORE,
+		t1.RANK_TIME_SIZE,
+		t1.UPDATED_DATE,
+		t2.new_mem_tier as SCORE_LEVEL,
+		SCORE_MEMEBER_LEVEl_INDATE,
+		SCORE_TYPE
+		FROM T_VBP_MEMBER_SCORE_LEVEL_INFO t1,member_mem_info t2
+		<where>
+			t1.MEMBER_INFO_ID =#{memberInfoId} and t1.member_info_id=t2.id
+		</where>
+	</select>
+	<insert id="insert">
+		<selectKey keyProperty="id" resultType="long" order="BEFORE">
+			SELECT S_VBP_MEMBER_SCORE_LEVEL_INFO.NEXTVAL FROM DUAL
+     	</selectKey>
+		INSERT INTO T_VBP_MEMBER_SCORE_LEVEL_INFO
+		(
+			ID,
+			MEMBER_INFO_ID,
+			MEM_NUM,
+			AVAILABLE_SCORE,
+			RANK_SCORE,
+			RANK_TIME_SIZE,
+			UPDATED_DATE,
+			SCORE_LEVEL,
+			SCORE_MEMEBER_LEVEl_INDATE,
+			SCORE_TYPE 
+		)
+		VALUES
+		( 	#{id},
+			#{memberInfoId,jdbcType=VARCHAR},
+			#{memberCode,jdbcType=VARCHAR},
+			#{availableScore,jdbcType=INTEGER},
+			#{rankScore,jdbcType=INTEGER},
+			#{rankTimeSize,jdbcType=INTEGER},
+			SYSDATE,
+			#{scoreLevel,jdbcType=INTEGER},
+			#{scoreMemberLevelIndate,jdbcType=DATE},
+			#{scoreType,jdbcType=VARCHAR}
+		)
+	</insert>
+	<update id="updateMemberAvailableScore">
+		UPDATE T_VBP_MEMBER_SCORE_LEVEL_INFO SET 		
+		AVAILABLE_SCORE=#{availableScore}	
+		<where>
+			MEMBER_INFO_ID =#{memberInfoId}
+		</where>
+	</update>
+
+    <update id="updateMemberScoreType">
+		UPDATE T_VBP_MEMBER_SCORE_LEVEL_INFO SET
+		SCORE_TYPE=#{scoreType},
+        UPDATED_DATE=SYSDATE
+		<where>
+			MEMBER_INFO_ID =#{memberInfoId}
+		</where>
+	</update>
+
+
+</mapper>

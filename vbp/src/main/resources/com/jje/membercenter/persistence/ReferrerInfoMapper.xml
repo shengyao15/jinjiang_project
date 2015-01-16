@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jje.membercenter.persistence.ReferrerInfoMapper">
+    <resultMap type="referrerInfo" id="referrerInfoResult">
+        <id property="id" column="ID"/>
+        <id property="memberInfoId" column="MEM_INFO_ID"/>
+        <id property="referrerCardNo" column="REFERRER_CARD_NO"/>        
+    </resultMap>
+
+   
+
+
+
+    <insert id="save">
+        <selectKey keyProperty="id" resultType="long" order="BEFORE">
+            SELECT S_VBP_REFERRER_INFO.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO
+        T_VBP_REFERRER_INFO
+        (
+        ID,
+        MEM_INFO_ID,
+        REFERRER_CARD_NO       
+        )
+        VALUES
+        (
+        #{id},
+        #{memberInfoId,jdbcType=DECIMAL},
+        #{referrerCardNo,jdbcType=VARCHAR}     
+        )
+    </insert>
+
+
+    
+
+</mapper> 

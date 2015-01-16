@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jje.membercenter.persistence.MemberScoreRedeemMapper">
+
+    <resultMap  id="memberScoreRedeemResult" type="memberScoreRedeem">
+        <id column="id" property="id"/>
+        <result column="order_no" property="orderId"/>
+        <result column="order_time" property="time"/>
+        <result column="create_time" property="time"/>
+        <result column="member_id" property="memId"/>
+        <result column="product_no" property="pdCode"/>
+        <result column="redeem_score" property="score"/>
+        <result column="status" property="status"/>
+    </resultMap>
+    
+    <insert id="addScoreRedeem" parameterType="memberScoreRedeem">
+	    INSERT INTO  T_MEMBER_SCORE_REDEEM
+	    (
+	    	ID,
+		    ORDER_NO,
+		    ORDER_TIME,
+		    CREATE_TIME,
+		    MEMBER_ID,
+		    PRODUCT_NO,
+		    REDEEM_SCORE,
+		    STATUS
+	    ) 
+	    values
+	    (
+	    	S_T_MEMBER_SCORE_REDEEM.NEXTVAL,
+		    #{orderId},
+		    #{time},
+		    #{time},
+		    #{memId},
+		    #{pdCode},
+		    #{score},
+		    1
+	    )
+    </insert>
+    
+    <select id="queryRedeem" parameterType="memberScoreRedeem" resultMap="memberScoreRedeemResult">
+      SELECT ID,ORDER_NO,ORDER_TIME,CREATE_TIME,MEMBER_ID,PRODUCT_NO,REDEEM_SCORE,STATUS FROM T_MEMBER_SCORE_REDEEM WHERE ORDER_TIME BETWEEN #{sTime} and  #{eTime}
+    </select>
+
+</mapper>
