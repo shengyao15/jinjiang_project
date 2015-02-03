@@ -1,0 +1,63 @@
+start-dfs.sh
+start-yarn.sh
+
+hdfs dfs -mkdir /in
+hdfs dfs -ls /
+
+hadoop dfs -copyFromLocal /data/in/ /in
+hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-2.2.0.jar wordcount /in /out
+hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-2.2.0.jar pi 2 2 
+
+------------------------------
+HDFS配置
+hadoop-env.sh
+core-site.xml
+hdfs-site.xml
+
+map-reduce配置
+mapred-env.sh
+mapred-site.xml
+
+yarn配置
+yarn-site.xml
+
+masters & slaves 文件
+---------------------------------
+start-dfs.sh
+NameNode
+DataNode
+SecondaryNameNode
+
+start-yarn.sh
+NodeManager
+ResourceManager
+
+start-spark-all.sh
+Master
+Worker
+
+
+----------------------------------------
+
+val lines = sc.textFile("README.md")   
+lines.count()   
+lines.first()   
+val pythonLines = lines.filter(line => line.contains("Python"))   
+ 
+scala> lines.first()  
+
+-----------------------------------------
+
+让更改的名字在不重启机器下生效
+
+# hostname yourname
+
+
+----------------------------------------
+yarn logs -applicationId <applicationId>
+
+
+
+
+
+

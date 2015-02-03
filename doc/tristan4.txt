@@ -107,6 +107,9 @@ dataview  viewer321 jjedb_standby
 cbp接口
 http://172.24.4.14:6068/cbp/wechat/lotteryNumber/765364
 
+MQ
+http://172.24.8.22:8161/admin/
+
 MISC-------------------------------------------------------------------------------------------------------------------------------------------------
 本地运行
 -Dtangosol.coherence.localhost=127.0.0.1 -Dtangosol.coherence.ttl=0 jetty:run
@@ -123,7 +126,7 @@ MISC----------------------------------------------------------------------------
 
 周报
 \\192.168.1.112\jje\CRM组周报\
-
+\\172.24.214.91\jje\CRM组周报\
 
 hosts
 C:\Windows\System32\drivers\etc
@@ -150,3 +153,45 @@ lily.li   Jj123456
 
 tnsnames.ora
 D:\oraclexe\app\oracle\product\10.2.0\server\NETWORK\ADMIN\tnsnames.ora
+
+
+---------------------------------------
+
+exp memberqa/654321@qa file=d:/jinjiang/20150119.dmp owner=memberqa
+imp tristan/654321@XE file=d:/oraclexe/dmp/qa.dmp fromuser=memberqa touser=tristan 
+exclude=TABLE:"IN('%CBP%','%COUPON%','%EBP%','%DBP%','%NBP%','%CMS%','%JJ000%','%QRTZ%','%ABP%')" 
+
+
+---------------------
+忘记密码 现有逻辑
+备注
+现有的登录逻辑
+登录验证
+passer/signin     MemberResource.validate
+发送验证码  
+忘记密码 
+input phone+fullName
+http://www.jinjiang.com/membercenter/info/getValidateCodeByPhone?phone=13564710283&fullName=%E7%9B%9B%E5%B0%A7
+melon直接调用 nbp/shortMessage/sendShortMessage
+注册
+https://www.jinjiang.com/passer/sendValidateSMSCode  post
+
+逻辑是在MemberResource. sendValidateCodeOperation  一辈子只能3次
+
+
+
+校验验证码 
+http://www.jinjiang.com/membercenter/info/recoverPassword?memName=13564710283&password=111111&type=Phone&validateCode=aaaaaa
+vbp
+	checkValidateCode
+	queryByEmail   queryByPhone
+	updateEamilOrTel
+
+MemberRepositoryImpl.addValidateCode
+
+只有当天内， 没有多少时间内
+
+------------------------------------
+
+
+
