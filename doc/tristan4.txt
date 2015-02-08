@@ -193,5 +193,16 @@ MemberRepositoryImpl.addValidateCode
 
 ------------------------------------
 
+http://www.jinjiang.com/edm/mail/PMtMQtnHr%2FqFmAlGD2AzCQ%3D%3D
+http://localhost:9999/edm/viewmail?mailId=PMtMQtnHr%2FqFmAlGD2AzCQ%3D%3D
+http://www.jinjiang.com/edm/mail/PMtMQtnHr%2FqFmAlGD2AzCQ%3D%3D
 
+29685016
+
+
+http://localhost:9999/edm/mail/PMtMQtnHr%2FqFmAlGD2A%2FzCQ%3D%3D
+
+
+
+http://localhost:9999/edm/mail/Iw0ZhVL1TxXuxO%2FDH3WC%2F47G0UyiE%2Fb%2F
 

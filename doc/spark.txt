@@ -23,12 +23,6 @@ count.collect()
 
 ------------------------------------------------------------------
 
-import org.apache.spark._
-import SparkContext._
-val sc = new SparkContext(args[0],"WordCount",System.getenv("SPARK_HOME"),Seq(System.getenv("SPARK_TEST_JAR")))
-val textRDD = sc.textFile(args[1])
-
------------------------------------------------------------
 hadoop dfs -copyFromLocal README.md /in
 
 ./bin/spark-submit --name SparkWordCount --class spark.examples.SparkWordCount --master spark://hadoop1:7077 --executor-memory 512M --total-executor-cores 1 ./bin/SparkWordCount.jar /in/README.md
@@ -36,6 +30,13 @@ hadoop dfs -copyFromLocal README.md /in
 ---------
 
 export SPARK_JAVA_OPTS="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=9999"
+
+scala---------------------------
+
+
+
+
+
 
 
 
