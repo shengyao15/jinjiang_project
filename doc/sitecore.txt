@@ -1,0 +1,48 @@
+http://club.test.jjsc.com/Offers/Promotion1   缺少样式 clearfix
+
+SITECORE-758   //修改密码-已打回  ken
+SITECORE-764   //修改密码-已打回 ken
+SITECORE-825   //个人信息无法保存 ken
+SITECORE-751   //黑卡  leon
+SITECORE-723   //no need
+SITECORE-743   //no need  
+SITECORE-760   //no need
+SITECORE-737   //no need
+SITECORE-745   //续费-已打回  leon
+SITECORE-857   //个人信息，生日 教育程度 无法保存 ken
+SITECORE-863   //优惠券  ken
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----------------------------------------------
+
+测试环境 金卡用户
+13012901306wang@jinjiang.com 123456
+
+优惠券
+13012901305wang@jinjiang.com  123456
+
+
+******前台********
+ &.主站 http://test.jjsc.com/
+ &.酒店 http://hotels.test.jjsc.com/
+ &.会员 http://club.test.jjsc.com/
+ &.会员-我的账户 http://club.test.jjsc.com/MyAccount/
+ 
+ 
+ 
+ 
+ 
+
