@@ -1,7 +1,7 @@
 http://club.test.jjsc.com/Offers/Promotion1   缺少样式 clearfix
 
 SITECORE-758   //修改密码-已打回  ken
-SITECORE-764   //修改密码-已打回 ken
+SITECORE-764   //修改密码-已打回 ken  done
 SITECORE-825   //个人信息无法保存 ken
 SITECORE-751   //黑卡  leon
 SITECORE-723   //no need
@@ -42,7 +42,28 @@ SITECORE-863   //优惠券  ken
  &.会员-我的账户 http://club.test.jjsc.com/MyAccount/
  
  
- 
- 
- 
+--------------------------------------------------------------------------
+优惠 1
+982 翻页问题  --c级
+
+
+个人 1
+986 验证手机
+
+积分 4
+993/891 修改积分类型
+893 	  积分补登
+
+
+续费 1
+995 生成订单错误
+931 任何情况允许续费
+
+
+
+其他
+961 热门城市  -- 不一定是bug 
+869 免费注册 url不是完整注册
+
+
 
