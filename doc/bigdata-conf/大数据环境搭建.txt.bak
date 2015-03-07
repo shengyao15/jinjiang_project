@@ -50,7 +50,7 @@ http://hadoop1:4040/
 创建目录---------------------------------
 mkdir -p /data/hadoop/dfs/name
 mkdir -p /data/hadoop/dfs/data
-mkdir -p /data/hadoop/dfs/name
+mkdir -p /data/hadoop/tmp
 
 
 运行测试hadoop -----------------------------

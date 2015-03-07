@@ -78,7 +78,7 @@ mapred-site.xml
 yarn配置
 yarn-site.xml
 
-masters & slaves 文件
+slaves 文件
 ---------------------------------
 spark配置
 spark-env.sh
