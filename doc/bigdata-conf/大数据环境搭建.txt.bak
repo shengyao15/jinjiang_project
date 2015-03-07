@@ -40,7 +40,7 @@ http://hadoop1:50070/dfshealth.jsp
 yarn
 http://hadoop1:8088/cluster/cluster
 
-Storm-master
+spark
 http://hadoop1:8080/
 
 Storm-shell
@@ -78,23 +78,17 @@ mapred-site.xml
 yarn配置
 yarn-site.xml
 
-masters & slaves 文件
+slaves 文件
 ---------------------------------
 spark配置
 spark-env.sh
 slaves
 
---------------------------
-和yarn集成
-参照 http://my.oschina.net/u/1169079/blog/292435
-export HADOOP_HOME= /home/hadoop/hadoop-2.0.0-cdh4.5.0
-export HADOOP_CONF_DIR= $HADOOP_HOME/etc/hadoop
-SPARK_EXECUTOR_INSTANCES=2
-SPARK_EXECUTOR_CORES=1
-SPARK_EXECUTOR_MEMORY=400M
-SPARK_DRIVER_MEMORY=400M
-SPARK_YARN_APP_NAME="Spark 1.0.0"
----------------------------------
+spark shell 重命名
+mv /root/spark/sbin/start-all.sh /root/spark/sbin/start-spark-all.sh
+mv /root/spark/sbin/stop-all.sh /root/spark/sbin/stop-spark-all.sh
+
+
 start-dfs.sh
 NameNode
 DataNode
@@ -109,7 +103,17 @@ Master
 Worker
 
 
-
+--------------------------
+和yarn集成
+参照 http://my.oschina.net/u/1169079/blog/292435
+export HADOOP_HOME= /home/hadoop/hadoop-2.0.0-cdh4.5.0
+export HADOOP_CONF_DIR= $HADOOP_HOME/etc/hadoop
+SPARK_EXECUTOR_INSTANCES=2
+SPARK_EXECUTOR_CORES=1
+SPARK_EXECUTOR_MEMORY=400M
+SPARK_DRIVER_MEMORY=400M
+SPARK_YARN_APP_NAME="Spark 1.0.0"
+---------------------------------
 
 ----------------------------------------
 
