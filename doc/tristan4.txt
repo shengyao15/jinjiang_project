@@ -46,6 +46,9 @@ http://cmsqa.jje.com:5555/passer/signin?go=http://banana.jje.com:5555
 被注册 
 WebMemberResource.regist
 
+mjenkins.jje.com
+jenkins  123456
+
 UAT环境----------------------------------------------------------------------------------------------------------------------------------------------
 web
 http://paradise.ejinjiang.com/
@@ -79,6 +82,9 @@ loadBalance  192.168.2.251:8081
 192.168.5.204:6068
 192.168.5.205:6066
 192.168.5.207:6068
+
+http://192.168.2.98/loyalty_chs/start.swe?SWECmd=Login&SWEPL=1&SWETS=1425542287182
+SHENGYAO/SHENGYAO
 
 
 生产环境----------------------------------------------------------------------------------------------------------------------------------------------
@@ -213,8 +219,88 @@ http://localhost:9999/edm/mail/6UQUxj0Ls4cjTbyYIq/kkCZs90n/5rRn       8548698127
 
 
 ---------------------------------------------
-sitecore
+sitecore 接口联调
+合并登录接口
+会员中心
+活动页面
+---------------------------------------------
 
+
+测试用户 UAT
+'13730300019wang@jinjiang.com',
+'13730300020wang@jinjiang.com',
+'13730300021wang@jinjiang.com',
+'13730300022wang@jinjiang.com',
+'13730300023wang@jinjiang.com',
+'13730300024wang@jinjiang.com',
+'13730300025wang@jinjiang.com',
+----------------------------------------
+
+
+测试用户 QA
+nell.zhou001@jinjiang.com / 123456
+
+
+
+
+
+
+-------------------
+兑换券(手动发放)  可以关联到  抵扣券(自动发放)
+活动码(手动发放)
+
+
+----------------------------------------
+用户偏好特征分析表：TB_REC_CH_USER_PREFERENCE
+
+
+SieBel交易记录：JJ000_SIEBEL_S_LOY_TXN_MAP
+酒店信息表：JJ000_WEBSITE_T_HBP_HOTEL_MAP
+
+200锦江电商推荐系统原始数据.docx
+旅游线路标签表  JJ000_WEBSITE_T_TBP_LABEL_MAP
+
+用户地点维度分析  TB_REC_CH_USER_LOCATION
+
+
+
+UserLocationKmeans.scala  --KMeans.train
+CollaborativeFilterByUserLocation.scala
+
+GroupOpBySpark.java  --KMeans.train
+GroupTagHelper.java  --KMeans.train
+TravelLineKmeans.scala  --KMeans.train
+
+协同过滤
+TestMlibRecmmend.scala --ALS.train
+
+------------------------------------------
+登录合并
+找回密码时，会先查v3表，这就有一个问题(用户无法找回v1中的密码)，验证身份信息的时候需要将v3表中的数据置个状态， 这样下次找回就能从v1中找回了。
+
+
+
+
+--------------------------------------------
+邮件查询 
+http://memberqa.jje.com:5555/admin/mms/querySendMessage/MAIL/1277
+
+CRM
+发送
+列表管理 - 批量列表 - 状态 已入队列
+手动配置模板
+管理-通讯  - 所有模板
+
+-------------------------------------------
+TODO
+svn://svn.jje.com/cb/BI
+svn://svn.jje.com/cb/BIGDATA
+svn://svn.jje.com/cb/ESB
+
+SSO cookie
+IndexController   LoginResource
+
+JS工具 
 
 
 
