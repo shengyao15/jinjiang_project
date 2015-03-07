@@ -108,7 +108,7 @@ export HBASE_OPTS="-XX:+UseConcMarkSweepGC"
 # export HBASE_IDENT_STRING=$USER
 
 # The scheduling priority for daemon processes.  See 'man nice'.
-# export HBASE_NICENESS=10hbaseserver
+# export HBASE_NICENESS=10
 
 # The directory where pid files are stored. /tmp by default.
 # export HBASE_PID_DIR=/var/hadoop/pids
