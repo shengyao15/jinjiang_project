@@ -1,0 +1,146 @@
+
+修改host hostname-------------------------------------
+vi /etc/hosts
+hostname hadoop1
+vi /etc/sysconfig/network
+
+修改profile------------------------------
+export JAVA_HOME=/usr/java/jdk1.6.0_45
+export PATH=$PATH:$JAVA_HOME/bin:$JAVA_HOME/jre/bin
+export CLASSPATH=.:$JAVA_HOME/lib:$JAVA_HOME/jre/lib:$CLASSPATH
+
+export PATH=$PATH:/usr/hadoop/hadoop-2.2.0/bin
+export PATH=$PATH:/usr/hadoop/hadoop-2.2.0/sbin
+
+/etc/init.d/iptables stop
+
+export SPARK_HOME=/usr/spark/spark-1.0.2-bin-hadoop2
+export PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
+
+export PATH=$PATH:/usr/hbase/hbase-0.96.2-hadoop2/bin
+
+
+
+免密码登录----------------------------------
+ssh-keygen -t dsa -P '' -f ~/.ssh/id_dsa
+cat ~/.ssh/id_dsa.pub >> ~/.ssh/authorized_keys
+
+soft link-------------------------
+cd ~
+ln -s /usr/hadoop/hadoop-2.2.0 hadoop
+ln -s /usr/hbase/hbase-0.96.2-hadoop2 hbase
+ln -s /usr/spark/spark-1.0.2-bin-hadoop2 spark
+
+
+标签----------------------
+
+hdfs
+http://hadoop1:50070/dfshealth.jsp
+
+yarn
+http://hadoop1:8088/cluster/cluster
+
+Storm-master
+http://hadoop1:8080/
+
+Storm-shell
+http://hadoop1:4040/
+
+
+创建目录---------------------------------
+mkdir -p /data/hadoop/dfs/name
+mkdir -p /data/hadoop/dfs/data
+mkdir -p /data/hadoop/tmp
+
+
+运行测试hadoop -----------------------------
+hadoop namenode -format
+start-dfs.sh
+start-yarn.sh
+
+hdfs dfs -mkdir /in
+hdfs dfs -ls /
+
+hadoop dfs -copyFromLocal /root/hadoop/README.txt /in
+hadoop jar /root/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.2.0.jar wordcount /in /out
+hadoop jar /root/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.2.0.jar pi 2 2 
+
+------------------------------
+HDFS配置
+hadoop-env.sh
+core-site.xml
+hdfs-site.xml
+
+map-reduce配置
+mapred-env.sh
+mapred-site.xml
+
+yarn配置
+yarn-site.xml
+
+masters & slaves 文件
+---------------------------------
+spark配置
+spark-env.sh
+slaves
+
+--------------------------
+和yarn集成
+参照 http://my.oschina.net/u/1169079/blog/292435
+export HADOOP_HOME= /home/hadoop/hadoop-2.0.0-cdh4.5.0
+export HADOOP_CONF_DIR= $HADOOP_HOME/etc/hadoop
+SPARK_EXECUTOR_INSTANCES=2
+SPARK_EXECUTOR_CORES=1
+SPARK_EXECUTOR_MEMORY=400M
+SPARK_DRIVER_MEMORY=400M
+SPARK_YARN_APP_NAME="Spark 1.0.0"
+---------------------------------
+start-dfs.sh
+NameNode
+DataNode
+SecondaryNameNode
+
+start-yarn.sh
+NodeManager
+ResourceManager
+
+start-spark-all.sh
+Master
+Worker
+
+
+
+
+----------------------------------------
+
+val lines = sc.textFile("README.md")   
+lines.count()   
+lines.first()   
+val pythonLines = lines.filter(line => line.contains("Python"))   
+ 
+scala> lines.first()  
+
+-----------------------------------------
+
+让更改的名字在不重启机器下生效
+
+# hostname yourname
+
+
+----------------------------------------
+yarn logs -applicationId <applicationId>
+
+
+hbase--------------------------
+
+http://www.abcn.net/2014/07/lighting-spark-with-hbase-full-edition.html
+
+spark-submit --master spark://hadoop1:7077 --class spark.examples.SparkWordCount2 --name SparkWordCount SparkWordCount.jar
+spark-submit --class spark.examples.SparkWordCount2 --name SparkWordCount SparkWordCount.jar
+
+
+spark-submit --driver-class-path "/usr/hbase/hbase-0.96.2-hadoop2/lib/*"  --class spark.examples.Tristan02 --name Tristan02 SparkWordCount.jar
+
+spark-shell --driver-class-path "/usr/hbase/hbase-0.96.2-hadoop2/lib/*"
+
+

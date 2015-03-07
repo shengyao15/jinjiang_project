@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
+	<property>
+	  <name>mapreduce.framework.name</name>
+	  <value>yarn</value>
+	</property>
+	<property>
+		<name>mapreduce.jobhistory.webapp.address</name>
+		<value>hadoop1:19888</value>
+		
+	</property>
+<property>
+		<name>mapreduce.jobhistory.address</name>
+		<value>hadoop1:10020</value>
+		
+	</property>
+	
+  
+<property>
+  <name>mapred.child.java.opts</name>
+  <!--<value>-Xmx200m -Xdebug -Xrunjdwp:transport=dt_socket,address=50051,server=y,suspend=y</value>-->
+<value>-Xmx200m</value>
+</property>
+
+<property>
+  <name>mapreduce.task.io.sort.mb</name>
+ <!-- <value>1</value>-->
+<value>10</value>
+  <description>The total amount of buffer memory to use while sorting 
+  files, in megabytes.  By default, gives each merge stream 1MB, which
+  should minimize seeks.</description>
+</property>
+
+</configuration>
