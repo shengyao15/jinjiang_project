@@ -200,23 +200,10 @@ MemberRepositoryImpl.addValidateCode
 ------------------------------------
 
 http://www.jinjiang.com/edm/mail/PMtMQtnHr%2FqFmAlGD2AzCQ%3D%3D
-http://localhost:9999/edm/viewmail?mailId=PMtMQtnHr%2FqFmAlGD2AzCQ%3D%3D
-http://www.jinjiang.com/edm/mail/PMtMQtnHr%2FqFmAlGD2AzCQ%3D%3D
-
 29685016
+http://paradise.ejinjiang.com/edm/mail/PMtMQtnHr%2FqFmAlGD2AzCQ%3D%3D
 
-
-http://localhost:9999/edm/mail/PMtMQtnHr%2FqFmAlGD2A%2FzCQ%3D%3D
-http://localhost:9999/edm/mail/PMtMQtnHr%2FqFmAlGD2AzCQ%3D%3D
-
-29685016
-29685016
-
-
-http://localhost:9999/edm/mail/Iw0ZhVL1TxXuxO%2FDH3WC%2F47G0UyiE%2Fb%2F
-
-http://localhost:9999/edm/mail/6UQUxj0Ls4cjTbyYIq/kkCZs90n/5rRn       8548698127041591626
-
+http://memberqa.jje.com:5555/admin/mms/querySendMessage/MAIL/1278
 
 ---------------------------------------------
 sitecore 接口联调
@@ -293,17 +280,34 @@ CRM
 
 -------------------------------------------
 TODO
-svn://svn.jje.com/cb/BI
-svn://svn.jje.com/cb/BIGDATA
-svn://svn.jje.com/cb/ESB
+svn://svn.jje.com/cb/BI --done
+svn://svn.jje.com/cb/BIGDATA	--done
+svn://svn.jje.com/cb/ESB	--done
 
-SSO cookie
-IndexController   LoginResource
+SSO cookie  IndexController   LoginResource   --done
 
-JS工具 
+JS工具 --done
+
+windows运行linux命令  --done
+
+jsonp 跨域
+
+hp机器luna搭建开发环境		--done
+
+hp机器vm运行spark hbase  --done
+
+熟悉自己以前写的代码   --done
+
+看jje大数据的代码    
 
 
+--------------------------------------------------
+jimmy
+http://jira.jje.com/issues/?filter=13128
+http://jira.jje.com/issues/?filter=13128&jql=project%20%3D%20SITECORE%20AND%20%E6%8F%90%E4%BA%A4%E4%BA%BA%20%3D%20%22jimmy.jiang%22%20AND%20createdDate%20%3E%3D%20%222015%2F02%2F01%2008%3A00%22%20AND%20status%20!%3D%20Closed%20ORDER%20BY%20priority%20DESC%2C%20status%20ASC%2C%20summary%20ASC%2C%20key%20ASC
 
+steven
+http://jira.jje.com/issues/?filter=13113
 
 
 
