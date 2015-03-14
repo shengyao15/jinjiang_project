@@ -61,6 +61,8 @@ start-yarn.sh
 hdfs dfs -mkdir /in
 hdfs dfs -ls /
 
+mkdir /in
+cp /root/hadoop/README.txt /in
 hadoop dfs -copyFromLocal /root/hadoop/README.txt /in
 hadoop jar /root/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.2.0.jar wordcount /in /out
 hadoop jar /root/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.2.0.jar pi 2 2 
@@ -78,9 +80,9 @@ mapred-site.xml
 yarn配置
 yarn-site.xml
 
-slaves 文件
----------------------------------
-spark配置
+slaves
+
+spark配置---------------------------------
 spark-env.sh
 slaves
 
@@ -88,7 +90,18 @@ spark shell 重命名
 mv /root/spark/sbin/start-all.sh /root/spark/sbin/start-spark-all.sh
 mv /root/spark/sbin/stop-all.sh /root/spark/sbin/stop-spark-all.sh
 
+spark测试--------------------------------------
 
+spark-shell
+
+val lines = sc.textFile("/root/spark/README.md")   
+lines.count()   
+lines.first()   
+val pythonLines = lines.filter(line => line.contains("Python"))   
+lines.first()  
+
+
+命令对于的进程----------------------------------
 start-dfs.sh
 NameNode
 DataNode
@@ -104,36 +117,35 @@ Worker
 
 
 --------------------------
-和yarn集成
+和yarn集成  -- 一定要启动hadoop了
 参照 http://my.oschina.net/u/1169079/blog/292435
-export HADOOP_HOME= /home/hadoop/hadoop-2.0.0-cdh4.5.0
-export HADOOP_CONF_DIR= $HADOOP_HOME/etc/hadoop
+export HADOOP_HOME=/usr/hadoop/hadoop-2.2.0
+export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
 SPARK_EXECUTOR_INSTANCES=2
 SPARK_EXECUTOR_CORES=1
 SPARK_EXECUTOR_MEMORY=400M
 SPARK_DRIVER_MEMORY=400M
-SPARK_YARN_APP_NAME="Spark 1.0.0"
----------------------------------
+SPARK_YARN_APP_NAME="TristanSpark"
 
-----------------------------------------
+测试
+val lines = sc.textFile("/in/README.txt").count 
 
-val lines = sc.textFile("README.md")   
-lines.count()   
-lines.first()   
-val pythonLines = lines.filter(line => line.contains("Python"))   
- 
-scala> lines.first()  
+hbase 配置---------------------------------
+hbase-env.sh
+hbase-site.xml
+regionservers
 
------------------------------------------
+mkdir -p /data/hbase/zookeeper
 
-让更改的名字在不重启机器下生效
-
-# hostname yourname
-
-
-----------------------------------------
-yarn logs -applicationId <applicationId>
-
+hbase 测试-------------------------------------
+start-hbase.sh
+hbase shell
+create 'mytable', 'cf' 
+put 'mytable','first','cf:info','patience and courage' 
+list 
+scan "mytable" 
+get "mytable","first" 
+count "mytable" 
 
 hbase--------------------------
 
@@ -146,5 +158,53 @@ spark-submit --class spark.examples.SparkWordCount2 --name SparkWordCount SparkW
 spark-submit --driver-class-path "/usr/hbase/hbase-0.96.2-hadoop2/lib/*"  --class spark.examples.Tristan02 --name Tristan02 SparkWordCount.jar
 
 spark-shell --driver-class-path "/usr/hbase/hbase-0.96.2-hadoop2/lib/*"
+
+
+------------------------------------------------
+处理hbase的问题
+hadoop fs -rmr /hbase
+2015-03-13 18:34:40,856 ERROR [MASTER_TABLE_OPERATIONS-hadoop1:45125-0] handler.CreateTableHandler: Error trying to create the table hbase:namespace
+java.io.IOException: Unable to move table from temp=hdfs://hadoop1:9000/hbase/.tmp/data/hbase/namespace to hbase root=hdfs://hadoop1:9000/hbase/data/hbase/namespace
+
+修改个路径
+hbase.rootdir
+hbase.zookeeper.property.dataDir
+
+spark-submit
+java.lang.IllegalStateException: unread block data
+
+无法解决
+直接用hp上的虚拟机了
+
+
+
+
+
+
+
+---------------------
+dbp 阅读
+1> bigdata-web  
+智能推荐系统管理平台
+表
+tb_rec_scene
+tb_rec_scene_config
+
+
+2> katherine
+SendEdmMain
+TB_REC_CH_EDM_PROMOTION_MEMENBER_HOTEL
+3天之内
+查找邮件地址   T_DBP_MEMBER_MERGE
+T_DBP_EDM_SEND_LOG
+
+3> dbp
+LoginDataResource
+DataTaskResource
+DmsRecommendResource
+MobileLocationResource
+MockRecommendResource
+RecommendResource
+
 
 
