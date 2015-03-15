@@ -121,10 +121,10 @@ Worker
 参照 http://my.oschina.net/u/1169079/blog/292435
 export HADOOP_HOME=/usr/hadoop/hadoop-2.2.0
 export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
-SPARK_EXECUTOR_INSTANCES=2
+SPARK_EXECUTOR_INSTANCES=1
 SPARK_EXECUTOR_CORES=1
-SPARK_EXECUTOR_MEMORY=400M
-SPARK_DRIVER_MEMORY=400M
+SPARK_EXECUTOR_MEMORY=1g
+SPARK_DRIVER_MEMORY=1g
 SPARK_YARN_APP_NAME="TristanSpark"
 
 测试
@@ -206,5 +206,53 @@ MobileLocationResource
 MockRecommendResource
 RecommendResource
 
+
+----------------------------------------
+视频
+MLLIB------------
+kmeans ok
+
+ALS
+java.lang.StackOverflowError java.util.zip.Inflater.inflate
+
+增加参数(特别是-Xss10m)
+SPARK_EXECUTOR_INSTANCES=1
+SPARK_EXECUTOR_CORES=1
+SPARK_EXECUTOR_MEMORY=2g
+SPARK_DRIVER_MEMORY=2g
+SPARK_JAVA_OPTS=-Xss10m
+参照
+http://f.dataguru.cn/thread-368353-1-1.html
+http://mail-archives.us.apache.org/mod_mbox/spark-user/201403.mbox/%3CCABeDAjGkqK9LLNkEw9P=_QAAk5+GJp2H7897srO9=0DXc9VFPA@mail.gmail.com%3E
+官方例子
+http://spark.apache.org/docs/latest/mllib-collaborative-filtering.html
+
+
+运行很长时间后
+RMSE (validation) = 0.8836263949566461 for the model trained with rank = 12, lambda = 10.0, and numIter = 20.
+
+如果不改参数，修改下val numIters = List(10, 20)的值就ok了 
+--> 锦江是用什么参数的？
+
+streaming-------------------------
+
+dstream ( discrete stream 离散) 是rdd按时间排序的集合
+
+三种场景
+无状态/有状态stateful/window
+
+输入源 需要手动加载jar包
+
+主要方法
+transform  可以和历史数据的rdd做join等操作， 在线的机器学习
+updateStateByKey  累加器
+window操作 reduceByKeyAndWindow  
+
+持久化
+会有个备份，流数据不能重现
+checkpoint 写到硬盘
+对于stateful和window必须checkpoint
+
+RDD的某些partition丢失，可以通过lineage重新计算得到
 
 
