@@ -289,15 +289,25 @@ JS工具 --done
 
 windows运行linux命令  --done
 
-jsonp 跨域
+jsonp 跨域  --done 没有用到
 
 hp机器luna搭建开发环境		--done
 
 hp机器vm运行spark hbase  --done
 
-熟悉自己以前写的代码   --done
+熟悉自己以前写的scala代码   --done
 
-看jje大数据的代码    
+看jje大数据的代码    --> 需要转换成java项目，在新目录中重新checkout
+										 --> 编译报错，find . -name pom.xml |xargs grep jdk
+										 
+										 
+										 
+										 
+java项目变成非java项目，保证不报错   --done
+
+
+邮件查询慢的问题 --> 使用分析函数
+
 
 
 --------------------------------------------------
@@ -307,6 +317,48 @@ http://jira.jje.com/issues/?filter=13128&jql=project%20%3D%20SITECORE%20AND%20%E
 
 steven
 http://jira.jje.com/issues/?filter=13113
+
+--------------------------------------------------------
+新优惠券
+锦江之星优惠券后台测试地址：
+http://10.0.1.114:9001/CouponMgmt/CouponMgmt.aspx
+账号密码：zhangwanwan/wanwan!!3
+
+http://memberqa.jje.com:5555/eagle  tester/Aa123456
+
+兔儿
+http://10.0.1.114:9002/crm.aspx
+
+--------------------------------------------------------
+SELECT top 10 * FROM dbo.cds_guestwebuser;
+SELECT top 10 * FROM dbo.crm_GuestAccounts;
+
+-----------------
+sitecore uat
+http://club.uat.jjsc.com/
+
+
+--------------------------
+
+1>
+http://wenku.baidu.com/link?url=Gq-cE3hl0MFEFzsLcZRPspfdu92iBmSeSVghntwkfTEK-xzi38HtghxrIN-76Uw6gWHWZjWh9xsAhXwUhEVVOBwdxESsKkLI_vE9WHa6GMq
+1.对查询进行优化，应尽量避免全表扫描，首先应考虑在 where 及 order by 涉及的列上建立索引。 
+2.应尽量避免在 where 子句中对字段进行 null 值判断，否则将导致引擎放弃使用索引而进行全表扫描，如： 
+select id from t where num is null
+
+那是不是v2 v3表的查询语句要改呢？
+设置成非空 并如何给个默认值
+
+2>
+邮件查询不用orderby
+
+---------------------------------------------------------------
+
+
+
+
+
+
 
 
 

@@ -235,8 +235,8 @@ RMSE (validation) = 0.8836263949566461 for the model trained with rank = 12, lam
 --> 锦江是用什么参数的？
 
 streaming-------------------------
-
-dstream ( discrete stream 离散) 是rdd按时间排序的集合
+val ssc = new StreamingContext(sc, Seconds(5))
+dstream (discrete stream 离散) 是rdd按时间排序的集合
 
 三种场景
 无状态/有状态stateful/window
@@ -254,5 +254,97 @@ checkpoint 写到硬盘
 对于stateful和window必须checkpoint
 
 RDD的某些partition丢失，可以通过lineage重新计算得到
+
+
+sparkSQL--------------------------
+
+Hive
+HQL作为查询接口
+HDFS作为底层存储
+MapRed作为执行层
+
+缺点
+复杂运算不易表达
+效率低
+调试困难
+
+外表
+内表--很少用 
+
+示例
+外表  sogou日志
+
+
+sparkSQL
+列存储优化
+schemaRDD
+
+示例 参考 http://blog.csdn.net/bluejoe2000/article/details/41412107
+注意最后一行不能有回车，shell中可以运行，但是eclipse中编译不通过，需要将case class Person(name: String, age: Int)
+移到main外面
+
+cat ./examples/src/main/resources/people.txt  
+Michael, 29  
+Andy, 30  
+Justin, 19  
+------
+val sqlContext = new org.apache.spark.sql.SQLContext(sc)  
+import sqlContext._  
+case class Person(name: String, age: Int)  
+val people = sc.textFile("people.txt").map(_.split(",")).map(p => Person(p(0), p(1).trim.toInt))  
+people.registerAsTable("people")  
+val teenagers = sql("SELECT name FROM people WHERE age >= 13 AND age <= 19")  
+teenagers.map(t => "Name: " + t(0)).collect().foreach(println)  
+
+
+jje是否有代码将hbase中的数据映射成对象的。--没有用到
+
+总结:SparkSQL就是将数据ORMapping成对象，通过类似于hql的方式来查出
+
+
+----------------------------------------------
+
+图
+主要分析数据之间的联系
+监控电商卖家刷评分
+
+
+表和图之间的转换
+triplet = vertex table (顶点) + edge table (边)
+
+对于大量的图需要用到分布式存储 PartitionStrategy
+用到了顶点切分 vertex cut
+增加了一张路由表  routing table
+
+VertexRDD
+EdgeRDD
+EdgeTripletRDD
+
+模型
+Pregel
+
+转换(mapVertices,mapEdges,mapTriplets)，结构(reverse,subgraph), 连接操作(joinVertices)，
+聚合(mapReduceTriplets,maxInDegree), 缓存(cache)
+
+PageRank
+根据权重计算被指向最多的页面
+
+
+----------------------------------------------
+
+第4章 spark工作机制详解
+Application --> 用户自定义的spark程序，用户提交后，spark为app分配资源，将程序转换并执行
+RDD Graph --> 当RDD遇到Action算子时，将之前所有的算子形成一个有向无环图(DAG)，就是RDD Graph，再转换成job提交到集群执行。
+Job-->一个App中可以包含多个job
+Stage-->每个job会根据RDD的宽依赖关系被切分成很多stage，每个stage中包含一组相同的taskset
+Task-->一个partition对应一个task， task放入Executor线程池中执行
+
+
+
+
+
+
+
+
 
 
