@@ -353,7 +353,19 @@ select id from t where num is null
 邮件查询不用orderby
 
 ---------------------------------------------------------------
+erm登录
+ERM_ECLinkMan  -  CRM_QiYeLianXiRen
+企业客户协议表  -- 协议代码 房价代码
 
+
+--------------------------------
+TODO
+tool 无线连不上
+登录合并 --增加新的身份验证接口
+erm登录
+jjzx app对接 
+优惠券/tool 重构 使用form
+svn eclipse插件
 
 
 
