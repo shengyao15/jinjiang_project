@@ -227,12 +227,14 @@ http://mail-archives.us.apache.org/mod_mbox/spark-user/201403.mbox/%3CCABeDAjGkq
 官方例子
 http://spark.apache.org/docs/latest/mllib-collaborative-filtering.html
 
+spark-submit --driver-memory 2g --class week6.MovieLensALS tristan.jar /usr/spark/spark-1.0.2-bin-hadoop2/tristan/als/medium/ /usr/spark/spark-1.0.2-bin-hadoop2/tristan/als/tristan.txt
 
 运行很长时间后
 RMSE (validation) = 0.8836263949566461 for the model trained with rank = 12, lambda = 10.0, and numIter = 20.
 
 如果不改参数，修改下val numIters = List(10, 20)的值就ok了 
 --> 锦江是用什么参数的？
+
 
 streaming-------------------------
 val ssc = new StreamingContext(sc, Seconds(5))

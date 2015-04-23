@@ -96,7 +96,6 @@ http://210.14.68.246:6067/mgw/member/keyInfoCheck/phone/13661891634
 内网
 172.24.88.29:6067
 
-
 线上问题
 查看数据库 192.168.2.180
 xingxing.zhang
@@ -360,12 +359,15 @@ ERM_ECLinkMan  -  CRM_QiYeLianXiRen
 
 --------------------------------
 TODO
-tool 无线连不上
-登录合并 --增加新的身份验证接口
+tool 无线连不上  -- done
+登录合并 -- 增加新的身份验证接口
 erm登录
 jjzx app对接 
-优惠券/tool 重构 使用form
-svn eclipse插件
+优惠券/tool 重构 使用form  -- done
+svn eclipse插件  -- done
+登录合并 -- 验证身份信息接口 还需要修改所有该loginName的状态，以防其他人再用该loginName找回密码。
+
+
 
 -------------------------------------
 会员中心国际化
@@ -378,8 +380,45 @@ sitecore接口联调
 锦江之星会员合并
 锦江之星优惠券系统移植
 
+--------------------------------------
+优惠券状态
+CouponCommonType
+
+
+1> What's the table E-R diagram about member login function? (which contains the password) 
+
+2> After integration，if customer change password at http://www.goldentulip.com/ 
+Does the customer need to use the new password instead of old one to logon to http://club.jinjiang.com?
+Another word, should the password be synchronized?
+
+3> Is there some relation between online user and offline user(from PMS)? If true, how to combine them together?
+
+4> Is there any enterprise-customer in your website?  If true, is there any difference with personal member?
 
 
 
+
+
+
+-----------------------------
+神秘顾客
+http://172.24.4.14:6067/cbp/mysteryCustomer/insert
+
+<mysteryCustomerRecordDto>
+	<cardNo>6621489460</cardNo>
+	<email>shengyao15@126.com</email>
+	<hotelId>512</hotelId>
+	<hotelName>锦江虹桥宾馆</hotelName>
+	<mcMemberCode>4029400</mcMemberCode>
+	<name>盛尧</name>
+	<phone>13564710283</phone>
+</mysteryCustomerRecordDto>
+
+-----------------------------------
+ERM
+建表
+CX_ERM_ECLINKMAN(ECMESSAGEID,ACCOUNTNUMBER,PASSWORD,ISENABLED,ACCOUNTTYPE)
+CX_ERM_EC(ORI_ID,CNNAME,COMPANYSHORTNAME,ISENABLED,)
+CX_ERM_ECAMT
 
 

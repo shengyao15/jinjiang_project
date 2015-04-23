@@ -336,7 +336,7 @@ PageRank
 Application --> 用户自定义的spark程序，用户提交后，spark为app分配资源，将程序转换并执行
 RDD Graph --> 当RDD遇到Action算子时，将之前所有的算子形成一个有向无环图(DAG)，就是RDD Graph，再转换成job提交到集群执行。
 Job-->一个App中可以包含多个job
-Stage-->每个job会根据RDD的依赖关系被切分成很多stage，每个stage中包含一组相同的taskset
+Stage-->每个job会根据RDD的宽依赖关系被切分成很多stage，每个stage中包含一组相同的taskset
 Task-->一个partition对应一个task， task放入Executor线程池中执行
 
 
