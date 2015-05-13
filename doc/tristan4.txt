@@ -86,6 +86,8 @@ loadBalance  192.168.2.251:8081
 http://192.168.2.98/loyalty_chs/start.swe?SWECmd=Login&SWEPL=1&SWETS=1425542287182
 SHENGYAO/SHENGYAO
 
+sitecoretest
+
 
 生产环境----------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -175,13 +177,19 @@ exclude=TABLE:"IN('%CBP%','%COUPON%','%EBP%','%DBP%','%NBP%','%CMS%','%JJ000%','
 passer/signin     MemberResource.validate
 发送验证码  
 忘记密码 
+第一步 validatePhone
+第二步
+http://paradise.ejinjiang.com/membercenter/info/checkNormalMember
+
+第三步
+
 input phone+fullName
 http://www.jinjiang.com/membercenter/info/getValidateCodeByPhone?phone=13564710283&fullName=%E7%9B%9B%E5%B0%A7
 melon直接调用 nbp/shortMessage/sendShortMessage
 注册
 https://www.jinjiang.com/passer/sendValidateSMSCode  post
 
-逻辑是在MemberResource. sendValidateCodeOperation  一辈子只能3次
+逻辑是在MemberResource.sendValidateCodeOperation  一辈子只能3次
 
 
 
@@ -418,7 +426,82 @@ http://172.24.4.14:6067/cbp/mysteryCustomer/insert
 ERM
 建表
 CX_ERM_ECLINKMAN(ECMESSAGEID,ACCOUNTNUMBER,PASSWORD,ISENABLED,ACCOUNTTYPE)
-CX_ERM_EC(ORI_ID,CNNAME,COMPANYSHORTNAME,ISENABLED,)
-CX_ERM_ECAMT
+CX_ERM_EC(ORI_ID,CNNAME,COMPANYSHORTNAME,ISENABLED)
+CX_ERM_ECAMT(ECMESSAGEID,AgreementTypeCode[CountryAgreement],AgreementCode,RoomRateCode)
+
+
+select e1.*,e1.rowid from CX_ERM_ECLinkMan e1;
+select e2.ORI_ID, e2.Cnname, e2.Companyshortname, e2.isenabled ,e2.rowid  from CX_ERM_EC e2; 
+select e3.ecmessageid ,  e3.agreementtypecode , e3.agreementcode , e3.roomratecode ,e3.rowid  from CX_ERM_ECAMT e3;
+
+
+select e1.ecmessageid, e1.accountnumber, e1.accounttype, e1.isenabled , 
+e2.Cnname, e2.Companyshortname, e2.isenabled , 
+e3.agreementtypecode , e3.agreementcode , e3.roomratecode 
+from CX_ERM_ECLinkMan e1
+left join CX_ERM_EC e2
+   on e1.ecmessageid = e2.ori_id
+left join CX_ERM_ECAMT e3
+   on e1.ecmessageid = e3.ecmessageid
+where e1.accountnumber='hp_slave1' and e1.password='123456' and e3.agreementtypecode ='CountryAgreement'
+
+--------------
+Stored 存储 - 能显示
+Indexed 索引 - 能搜索
+Tokenized 分词  
+
+luence倒排索引
+数据库是B树索引
+所以solr快
+
+solr就是luence的web版
+
+
+首先 B树不是二叉树， 可以有很多叉， 取决于定义Key的数量， 或者是权的数量
+B树是平衡树的种类之一， 比二叉树的优点是， 由于它始终调整为“平衡”， 那么搜索时，始终能保持LOGN的效率， 二叉树如果极度不平衡， 比如左边一个，右边一长串， 这样的情况下最坏搜索效率能下降到N。
+其所包含的索引条目都是按照顺序排列的
+http://blog.itpub.net/9842/viewspace-312607/
+
+--------------------------------------
+QQ
+白天停电晚上失眠工资太低只好吃面打开邓选找到答案：原来是社会主义初级阶段。再往后翻，我靠！一百年不变
+今年夏天冰箱就看你俩了！火箭进决赛，我就选海尔。快船进决赛，我就选格力。
+
+
+
+--------------------------------------
+周年庆 
+mcCode 索引 -- done
+使用兑换码  乐观锁  --done
+加上 MemberBaseDto --done
+增加日志  --done
+接口文档
+上qa环境
+
+select * from T_ANN_TASK;
+select * from T_ANN_TASK_SIGNIN;
+select * from T_ANN_LOTTERY;
+select * from T_ANN_LOTTERY_TRACE;
+
+create index INX_TASK_MC on T_ANN_TASK (MC_CODE);
+create index INX_TASK_SIGNIN_MC on T_ANN_TASK_SIGNIN (MC_CODE);
+create index INX_LOTTERY_MC on T_ANN_LOTTERY (MC_CODE);
+create index INX_LOTTERY_TRACE_MC on T_ANN_LOTTERY_TRACE (MC_CODE);
+
+
+create unique index INX_TASK_UNIQUE on T_ANN_TASK (MC_CODE, TASK_CODE);
+create unique index INX_TASK_SIGNIN_UNIQUE on T_ANN_TASK_SIGNIN (MC_CODE, SIGNIN_DATE, TYPE);
+
+
+---------------------------
+电商会员接口
+1， 修改密码 input:mcCode + 旧密码(md5,sha1) +新密码(md5,sha1)
+2， 根据邮箱手机判断是否是网站会员 (忘记密码第一步) input: 登录名
+v1 v2 v3 如果没有就一张张查
+
+
+3， 验证姓名 (忘记密码第二步) input: 登录名+姓名 
+4， 忘记密码,包含身份校验逻辑，v2v3洗到v1 (忘记密码第三步) input：登录名 + 姓名 + 手机验证码 + 新密码 + 验证类型(手机/邮箱)
+5， 修改所有现有登录合并接口，使其支持sha1洗到v1表中
 
 
