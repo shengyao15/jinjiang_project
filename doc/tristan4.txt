@@ -73,7 +73,7 @@ http://paradiseadmin.ejinjiang.com/admin
 Aa123456
 
 
-QA admin
+MQ  QA admin
 http://192.168.5.17:8161  admin/admin
 
 UAT
@@ -115,7 +115,7 @@ cbp接口
 http://172.24.4.14:6068/cbp/wechat/lotteryNumber/765364
 
 MQ
-http://172.24.8.22:8161/admin/
+http://172.24.8.22:8161/admin/   admin/admin
 
 MISC-------------------------------------------------------------------------------------------------------------------------------------------------
 本地运行
@@ -498,10 +498,35 @@ create unique index INX_TASK_SIGNIN_UNIQUE on T_ANN_TASK_SIGNIN (MC_CODE, SIGNIN
 1， 修改密码 input:mcCode + 旧密码(md5,sha1) +新密码(md5,sha1)
 2， 根据邮箱手机判断是否是网站会员 (忘记密码第一步) input: 登录名
 v1 v2 v3 如果没有就一张张查
-
-
 3， 验证姓名 (忘记密码第二步) input: 登录名+姓名 
-4， 忘记密码,包含身份校验逻辑，v2v3洗到v1 (忘记密码第三步) input：登录名 + 姓名 + 手机验证码 + 新密码 + 验证类型(手机/邮箱)
+4， 忘记密码,包含身份校验逻辑，v2v3洗到v1 (忘记密码第三步) input：登录名 + 姓名 + 手机验证码 + 新密码 
+input：登录名+姓名+新密码
+
+
 5， 修改所有现有登录合并接口，使其支持sha1洗到v1表中
+
+
+----
+所有接口增加 oplog 异步方式
+log.error 统一
+errorCode 统一
+
+CheckWebSiteMemberDto --》 ForgetPwdDto  --done
+
+
+忘记密码还需要带有激活流程  --done
+
+
+----------------------
+神秘顾客 uat
+http://uat.jjsc.com/event/shenmiguke.html
+http://club.uat.jjsc.com/#
+7700171577 1234567
+
+
+eagle uat
+http://172.24.214.242:8081/eagle/
+tester Aa123456
+
 
 
